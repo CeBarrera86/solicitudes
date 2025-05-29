@@ -1,0 +1,1122 @@
+[PROCEDURE]
+NAME wndScanning
+GLOBAL
+[COMMON]
+FROM ABC Window
+MODIFIED '2021/12/13' ' 7:01:05'
+[DATA]
+[SCREENCONTROLS]
+! PROMPT('Loc : empleado:'),USE(?Loc:empleado:Prompt)
+! ENTRY(@s30),USE(Loc:empleado)
+[REPORTCONTROLS]
+! STRING(@s30),USE(Loc:empleado)
+Loc:empleado             STRING(30)
+!!> GUID('c5410e02-8d11-4b30-a0d7-0954620976cf'),PROMPT('Loc : empleado:'),HEADER('Loc : empleado'),PICTURE(@s30),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('Loc : Filename:'),USE(?Loc:Filename:Prompt)
+! ENTRY(@s255),USE(Loc:Filename)
+[REPORTCONTROLS]
+! STRING(@s255),USE(Loc:Filename)
+Loc:Filename             STRING(255)
+!!> GUID('714fb5e4-2f04-4620-b648-9efea0b15812'),PROMPT('Loc : Filename:'),HEADER('Loc : Filename'),PICTURE(@s255),TYPEMODE(INS)
+[SCREENCONTROLS]
+! PROMPT('Local Request:'),USE(?LocalRequest:Prompt)
+! ENTRY(@n-14),USE(LocalRequest)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(LocalRequest)
+LocalRequest             LONG
+!!> GUID('9dc4318a-9109-4f7a-8000-d74adec96eb1'),PROMPT('Local Request:'),HEADER('Local Request'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! PROMPT('Original Request:'),USE(?OriginalRequest:Prompt)
+! ENTRY(@n-14),USE(OriginalRequest)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(OriginalRequest)
+OriginalRequest          LONG
+!!> GUID('cf8ea88a-4fcf-4f59-933a-5ac91fd80388'),PROMPT('Original Request:'),HEADER('Original Request'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! PROMPT('Local Response:'),USE(?LocalResponse:Prompt)
+! ENTRY(@n-14),USE(LocalResponse)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(LocalResponse)
+LocalResponse            LONG
+!!> GUID('14bf644c-a81e-453b-90a1-93cda5df3fd5'),PROMPT('Local Response:'),HEADER('Local Response'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! PROMPT('Files Opened:'),USE(?FilesOpened:Prompt)
+! ENTRY(@n3),USE(FilesOpened)
+[REPORTCONTROLS]
+! STRING(@n3),USE(FilesOpened)
+FilesOpened              BYTE
+!!> GUID('03658768-00c0-4791-8ce8-97a4a41e25b4'),PROMPT('Files Opened:'),HEADER('Files Opened'),PICTURE(@n3)
+[SCREENCONTROLS]
+! PROMPT('Window Opened:'),USE(?WindowOpened:Prompt)
+! ENTRY(@n-14),USE(WindowOpened)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(WindowOpened)
+WindowOpened             LONG
+!!> GUID('92400181-ca66-43b3-b38a-84ba6d7b625d'),PROMPT('Window Opened:'),HEADER('Window Opened'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! PROMPT('Window Initialized:'),USE(?WindowInitialized:Prompt)
+! ENTRY(@n-14),USE(WindowInitialized)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(WindowInitialized)
+WindowInitialized        LONG
+!!> GUID('006a23ae-0cc1-4119-8bd9-738119bd8af4'),PROMPT('Window Initialized:'),HEADER('Window Initialized'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! PROMPT('Force Refresh:'),USE(?ForceRefresh:Prompt)
+! ENTRY(@n-14),USE(ForceRefresh)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(ForceRefresh)
+ForceRefresh             LONG
+!!> GUID('2e8ba3cc-3df4-4770-b023-18f289f3ab01'),PROMPT('Force Refresh:'),HEADER('Force Refresh'),PICTURE(@n-14)
+[SCREENCONTROLS]
+! CHECK('&Show scanner UI'),USE(Loc:ShowUi),RIGHT
+[REPORTCONTROLS]
+! CHECK('&Show scanner UI'),USE(Loc:ShowUi),RIGHT
+Loc:ShowUi               SIGNED
+!!> GUID('590c17ec-2cd5-4081-813f-d288b29a694f'),VALID(BOOLEAN),PROMPT('&Show scanner UI'),HEADER('Loc : Show Ui'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('loc : Pixel Type:'),USE(?loc:PixelType:Prompt)
+! ENTRY(@n-7),USE(loc:PixelType),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-7),USE(loc:PixelType),RIGHT(1)
+loc:PixelType            SIGNED
+!!> GUID('0d6c9561-0e60-4ecb-979b-d8bb6fc22e1c'),PROMPT('loc : Pixel Type:'),HEADER('loc : Pixel Type'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('Loc : Pdf Filename:'),USE(?Loc:PdfFilename:Prompt)
+! ENTRY(@s255),USE(Loc:PdfFilename)
+[REPORTCONTROLS]
+! STRING(@s255),USE(Loc:PdfFilename)
+Loc:PdfFilename          STRING(255)
+!!> GUID('aec8e9c2-bd47-4b04-8df5-0e64cdb5c5b7'),PROMPT('Loc : Pdf Filename:'),HEADER('Loc : Pdf Filename'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('Loc : Tiff Filename:'),USE(?Loc:TiffFilename:Prompt)
+! ENTRY(@s255),USE(Loc:TiffFilename)
+[REPORTCONTROLS]
+! STRING(@s255),USE(Loc:TiffFilename)
+Loc:TiffFilename         STRING(255)
+!!> GUID('aeaf3593-2544-43e0-8218-f88165dde397'),PROMPT('Loc : Tiff Filename:'),HEADER('Loc : Tiff Filename'),PICTURE(@s255)
+[SCREENCONTROLS]
+! CHECK('Show &progress indicator'),USE(Loc:ShowProgress),RIGHT
+[REPORTCONTROLS]
+! CHECK('Show &progress indicator'),USE(Loc:ShowProgress),RIGHT
+Loc:ShowProgress         SIGNED
+!!> GUID('ea311ff0-9718-4233-aae8-381bd14d608e'),VALID(BOOLEAN),PROMPT('Show &progress indicator'),HEADER('Loc : Show Progress'),PICTURE(@n-7),JUSTIFY(RIGHT,1)
+[FILES]
+[OTHERS]
+CERTIFICADOS
+CONCEPTO_MEDICO
+[PROMPTS]
+%ReturnValue FIELD  ()
+%WindowOperationMode DEFAULT  ('Use WINDOW setting')
+%INISaveWindow LONG  (1)
+%ButtonAction DEPEND %Control DEFAULT TIMES 18
+WHEN  ('') ('No Special Action')
+WHEN  ('?Acquire') ('No Special Action')
+WHEN  ('?Close') ('No Special Action')
+WHEN  ('?List1') ('No Special Action')
+WHEN  ('?Loc:ShowProgress') ('No Special Action')
+WHEN  ('?Pdf') ('No Special Action')
+WHEN  ('?RotLeft') ('No Special Action')
+WHEN  ('?RotRight') ('No Special Action')
+WHEN  ('?Select') ('No Special Action')
+WHEN  ('?Tiff') ('No Special Action')
+WHEN  ('?Viewer') ('No Special Action')
+WHEN  ('?ZoomFit') ('No Special Action')
+WHEN  ('?ZoomIn') ('No Special Action')
+WHEN  ('?ZoomOut') ('No Special Action')
+WHEN  ('?loc:PixelType') ('No Special Action')
+WHEN  ('?loc:PixelType:Radio1') ('No Special Action')
+WHEN  ('?loc:PixelType:Radio1:2') ('No Special Action')
+WHEN  ('?loc:PixelType:Radio1:3') ('No Special Action')
+
+%ButtonRunName DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?Acquire') ('')
+WHEN  ('?Pdf') ('')
+WHEN  ('?Select') ('')
+WHEN  ('?Tiff') ('')
+
+%ButtonRunParameters DEPEND %Control DEFAULT TIMES 4
+WHEN  ('?Acquire') ('')
+WHEN  ('?Pdf') ('')
+WHEN  ('?Select') ('')
+WHEN  ('?Tiff') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 4
+WHEN  ('?Acquire') ()
+WHEN  ('?Pdf') ()
+WHEN  ('?Select') ()
+WHEN  ('?Tiff') ()
+
+%ButtonThread DEPEND %Control LONG TIMES 4
+WHEN  ('?Acquire') (0)
+WHEN  ('?Pdf') (0)
+WHEN  ('?Select') (0)
+WHEN  ('?Tiff') (0)
+
+%ButtonThreadStack DEPEND %Control DEFAULT TIMES 18
+WHEN  ('') ('25000')
+WHEN  ('?Acquire') ('25000')
+WHEN  ('?Close') ('25000')
+WHEN  ('?List1') ('25000')
+WHEN  ('?Loc:ShowProgress') ('25000')
+WHEN  ('?Pdf') ('25000')
+WHEN  ('?RotLeft') ('25000')
+WHEN  ('?RotRight') ('25000')
+WHEN  ('?Select') ('25000')
+WHEN  ('?Tiff') ('25000')
+WHEN  ('?Viewer') ('25000')
+WHEN  ('?ZoomFit') ('25000')
+WHEN  ('?ZoomIn') ('25000')
+WHEN  ('?ZoomOut') ('25000')
+WHEN  ('?loc:PixelType') ('25000')
+WHEN  ('?loc:PixelType:Radio1') ('25000')
+WHEN  ('?loc:PixelType:Radio1:2') ('25000')
+WHEN  ('?loc:PixelType:Radio1:3') ('25000')
+
+%ButtonParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Select') ('')
+
+%ButtonRequest DEPEND %Control DEFAULT TIMES 18
+WHEN  ('') ('None')
+WHEN  ('?Acquire') ('None')
+WHEN  ('?Close') ('None')
+WHEN  ('?List1') ('None')
+WHEN  ('?Loc:ShowProgress') ('None')
+WHEN  ('?Pdf') ('None')
+WHEN  ('?RotLeft') ('None')
+WHEN  ('?RotRight') ('None')
+WHEN  ('?Select') ('None')
+WHEN  ('?Tiff') ('None')
+WHEN  ('?Viewer') ('None')
+WHEN  ('?ZoomFit') ('None')
+WHEN  ('?ZoomIn') ('None')
+WHEN  ('?ZoomOut') ('None')
+WHEN  ('?loc:PixelType') ('None')
+WHEN  ('?loc:PixelType:Radio1') ('None')
+WHEN  ('?loc:PixelType:Radio1:2') ('None')
+WHEN  ('?loc:PixelType:Radio1:3') ('None')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupDuringValidate DEPEND %Control LONG TIMES 15
+WHEN  ('') (1)
+WHEN  ('?Acquire') (1)
+WHEN  ('?Close') (1)
+WHEN  ('?List1') (1)
+WHEN  ('?Loc:ShowProgress') (1)
+WHEN  ('?Pdf') (1)
+WHEN  ('?RotRight') (1)
+WHEN  ('?Select') (1)
+WHEN  ('?Tiff') (1)
+WHEN  ('?Viewer') (1)
+WHEN  ('?ZoomOut') (1)
+WHEN  ('?loc:PixelType') (1)
+WHEN  ('?loc:PixelType:Radio1') (1)
+WHEN  ('?loc:PixelType:Radio1:2') (1)
+WHEN  ('?loc:PixelType:Radio1:3') (1)
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+
+%CheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedAssignVariable DEPEND %CheckedAssigns FIELD TIMES 0
+
+%CheckedAssignValue DEPEND %CheckedAssigns DEFAULT TIMES 0
+
+%CheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl DEPEND %CheckedHides DEFAULT TIMES 0
+
+%CheckedControlAction DEPEND %CheckedHides DEFAULT TIMES 15
+WHEN  ('')TIMES 0
+WHEN  ('?Acquire')TIMES 0
+WHEN  ('?Close')TIMES 0
+WHEN  ('?List1')TIMES 0
+WHEN  ('?Loc:ShowProgress')TIMES 0
+WHEN  ('?Pdf')TIMES 0
+WHEN  ('?RotRight')TIMES 0
+WHEN  ('?Select')TIMES 0
+WHEN  ('?Tiff')TIMES 0
+WHEN  ('?Viewer')TIMES 0
+WHEN  ('?ZoomOut')TIMES 0
+WHEN  ('?loc:PixelType')TIMES 0
+WHEN  ('?loc:PixelType:Radio1')TIMES 0
+WHEN  ('?loc:PixelType:Radio1:2')TIMES 0
+WHEN  ('?loc:PixelType:Radio1:3')TIMES 0
+
+%UncheckedAssigns DEPEND %Control MULTI LONG TIMES 0
+
+%UncheckedAssignVariable DEPEND %UncheckedAssigns FIELD TIMES 0
+
+%UncheckedAssignValue DEPEND %UncheckedAssigns DEFAULT TIMES 0
+
+%UnCheckedHides DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl DEPEND %UnCheckedHides DEFAULT TIMES 0
+
+%UnCheckedControlAction DEPEND %UnCheckedHides DEFAULT TIMES 15
+WHEN  ('')TIMES 0
+WHEN  ('?Acquire')TIMES 0
+WHEN  ('?Close')TIMES 0
+WHEN  ('?List1')TIMES 0
+WHEN  ('?Loc:ShowProgress')TIMES 0
+WHEN  ('?Pdf')TIMES 0
+WHEN  ('?RotRight')TIMES 0
+WHEN  ('?Select')TIMES 0
+WHEN  ('?Tiff')TIMES 0
+WHEN  ('?Viewer')TIMES 0
+WHEN  ('?ZoomOut')TIMES 0
+WHEN  ('?loc:PixelType')TIMES 0
+WHEN  ('?loc:PixelType:Radio1')TIMES 0
+WHEN  ('?loc:PixelType:Radio1:2')TIMES 0
+WHEN  ('?loc:PixelType:Radio1:3')TIMES 0
+
+%ClassItem UNIQUE DEFAULT  ('Default', 'WindowToolbar')
+%DefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('WindowManager')
+WHEN  ('WindowToolbar') ('ToolbarClass')
+
+%ActualDefaultBaseClassType DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ClassLines DEPEND %ClassItem MULTI DEFAULT TIMES 1
+WHEN  ('Default') ('Ask {20}PROCEDURE(),DERIVED', 'Init {19}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'Kill {19}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeAccepted {11}PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeEvent {14}PROCEDURE(),BYTE,PROC,DERIVED', 'TakeNewSelection       PROCEDURE(),BYTE,PROC,DERIVED', |
+  'TakeWindowEvent        PROCEDURE(),BYTE,PROC,DERIVED')
+
+%ThisObjectName DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('ThisWindow')
+WHEN  ('WindowToolbar') ('Toolbar')
+
+%UseDefaultABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%UseABCBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (1)
+WHEN  ('WindowToolbar') (1)
+
+%ABCBaseClass DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('')
+WHEN  ('WindowToolbar') ('')
+
+%ExtBaseClass DEPEND %ClassItem DEFAULT TIMES 0
+
+%BaseClassIncludeFile DEPEND %ClassItem DEFAULT TIMES 0
+
+%DeriveFromBaseClass DEPEND %ClassItem LONG TIMES 2
+WHEN  ('Default') (0)
+WHEN  ('WindowToolbar') (0)
+
+%NewMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewMethodName DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewMethodPrototype DEPEND %NewMethods DEFAULT TIMES 0
+
+%NewClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%NewClassProperty DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataType DEPEND %NewClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%NewClassOtherType DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataIsRef DEPEND %NewClassPropertyItems LONG TIMES 0
+
+%NewClassDataSize DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim1 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim2 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim3 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%NewClassDataDim4 DEPEND %NewClassPropertyItems DEFAULT TIMES 0
+
+%ClassMethods DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassMethodName DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassMethodPrototype DEPEND %ClassMethods DEFAULT TIMES 0
+
+%ClassPropertyItems DEPEND %ClassItem MULTI LONG TIMES 0
+
+%ClassProperty DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataType DEPEND %ClassPropertyItems DEFAULT TIMES 1
+WHEN  ('WindowToolbar')TIMES 0
+
+%ClassOtherType DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataIsRef DEPEND %ClassPropertyItems LONG TIMES 0
+
+%ClassDataSize DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim1 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim2 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim3 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ClassDataDim4 DEPEND %ClassPropertyItems DEFAULT TIMES 0
+
+%ButtonReturnValueAssignment DEPEND %Control FIELD TIMES 1
+WHEN  ('?Select') ()
+
+%ButtonReturnValueReferenceAssign DEPEND %Control LONG TIMES 1
+WHEN  ('?Select') (0)
+
+%ButtonThreadParameters DEPEND %Control DEFAULT TIMES 1
+WHEN  ('?Select') ('')
+
+%ButtonThreadReturnValueAssignment DEPEND %Control FIELD TIMES 1
+WHEN  ('?Select') ()
+
+%LookupAssign DEPEND %Control MULTI LONG TIMES 0
+
+%MoreField DEPEND %LookupAssign DEFAULT TIMES 0
+
+%MoreTarget DEPEND %LookupAssign FIELD TIMES 0
+
+%CheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedControl1 DEPEND %CheckedEnables DEFAULT TIMES 0
+
+%CheckedControl1Action DEPEND %CheckedEnables DEFAULT TIMES 9
+WHEN  ('')TIMES 0
+WHEN  ('?Acquire')TIMES 0
+WHEN  ('?Close')TIMES 0
+WHEN  ('?List1')TIMES 0
+WHEN  ('?Loc:ShowProgress')TIMES 0
+WHEN  ('?RotRight')TIMES 0
+WHEN  ('?Select')TIMES 0
+WHEN  ('?Viewer')TIMES 0
+WHEN  ('?ZoomOut')TIMES 0
+
+%UnCheckedEnables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedControl1 DEPEND %UnCheckedEnables DEFAULT TIMES 0
+
+%UnCheckedControl1Action DEPEND %UnCheckedEnables DEFAULT TIMES 9
+WHEN  ('')TIMES 0
+WHEN  ('?Acquire')TIMES 0
+WHEN  ('?Close')TIMES 0
+WHEN  ('?List1')TIMES 0
+WHEN  ('?Loc:ShowProgress')TIMES 0
+WHEN  ('?RotRight')TIMES 0
+WHEN  ('?Select')TIMES 0
+WHEN  ('?Viewer')TIMES 0
+WHEN  ('?ZoomOut')TIMES 0
+
+%GlobalObject DEPEND %ClassItem DEFAULT TIMES 2
+WHEN  ('Default') ('NO')
+WHEN  ('WindowToolbar') ('NO')
+
+%ProcedureOneInstance LONG  (0)
+%ProcedureDisableEnhanceFocus LONG  (0)
+%ProcedureUseEnterInsteadTabOverride LONG  (0)
+%WindowUseEnterInsteadTab LONG  (1)
+%ProcedureUseEnterInsteadTabExcludeListCombo LONG  (0)
+%ProcedureUseEnterInsteadTabEnableNextTabStop LONG  (0)
+%ProcedureUseEnterInsteadTabExcludeG LONG  (1)
+%WindowUseEnterInsteadTabExclude MULTI DEFAULT  ()
+%WindowStyles MULTI LONG  ()
+%WindowStyleFontName DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontNameIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontSize DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontSizeIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontStyle DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontStyleIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleFontColor DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleFontCharSet DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormal DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundNormalVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundNormalIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleForegroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleForegroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelected DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleBackgroundSelectedVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStyleBackgroundSelectedIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStylePicture DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureVariable DEPEND %WindowStyles DEFAULT TIMES 0
+
+%WindowStylePictureIsVariable DEPEND %WindowStyles LONG TIMES 0
+
+%WindowStyleOtherListboxes MULTI DEFAULT  ()
+%ProcedureAutoBindFields MULTI LONG  ()
+%ProcedureAutoBindField DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldTPL DEPEND %ProcedureAutoBindFields DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedures MULTI LONG  ()
+%ProcedureAutoBindProcedure DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindProcedureTPL DEPEND %ProcedureAutoBindProcedures DEFAULT TIMES 0
+
+%ProcedureAutoBindFieldsIgnored MULTI LONG  ()
+%ProcedureAutoBindFieldIgnored DEPEND %ProcedureAutoBindFieldsIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindProceduresIgnored MULTI LONG  ()
+%ProcedureAutoBindProcedureIgnored DEPEND %ProcedureAutoBindProceduresIgnored DEFAULT TIMES 0
+
+%ProcedureAutoBindValidToAddField LONG  (0)
+%ProcedureUserBindFields MULTI LONG  ()
+%ProcedureUserBindField DEPEND %ProcedureUserBindFields FIELD TIMES 0
+
+%ProcedureAutoBindFieldIgnore DEPEND %ProcedureAutoBindFields LONG TIMES 0
+
+%ProcedureUserBindProcedures MULTI LONG  ()
+%ProcedureUserBindProcedure DEPEND %ProcedureUserBindProcedures PROCEDURE TIMES 0
+
+%ProcedureAutoBindProcedureIgnore DEPEND %ProcedureAutoBindProcedures LONG TIMES 0
+
+%ProcedureUserBindExpressions MULTI LONG  ()
+%ProcedureUserBindExpressionName DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ProcedureUserBindExpression DEPEND %ProcedureUserBindExpressions DEFAULT TIMES 0
+
+%ExtUITabIcon DEPEND %Control DEFAULT TIMES 0
+
+%ExtUITabStyleOverrideGlobal DEPEND %Control LONG TIMES 0
+
+%ExtUITabStyle DEPEND %Control DEFAULT TIMES 8
+WHEN  ('') ('Default')
+WHEN  ('?Acquire') ('Default')
+WHEN  ('?Close') ('Default')
+WHEN  ('?List1') ('Default')
+WHEN  ('?Loc:ShowProgress') ('Default')
+WHEN  ('?RotRight') ('Default')
+WHEN  ('?Viewer') ('Default')
+WHEN  ('?ZoomOut') ('Default')
+
+%FieldGradientColorType DEPEND %Control DEFAULT TIMES 8
+WHEN  ('') ('Off')
+WHEN  ('?Acquire') ('Off')
+WHEN  ('?Close') ('Off')
+WHEN  ('?List1') ('Off')
+WHEN  ('?Loc:ShowProgress') ('Off')
+WHEN  ('?RotRight') ('Off')
+WHEN  ('?Viewer') ('Off')
+WHEN  ('?ZoomOut') ('Off')
+
+%FieldGradientColorTypeVariable DEPEND %Control DEFAULT TIMES 8
+WHEN  ('') ('')
+WHEN  ('?Acquire') ('')
+WHEN  ('?Close') ('')
+WHEN  ('?List1') ('')
+WHEN  ('?Loc:ShowProgress') ('')
+WHEN  ('?RotRight') ('')
+WHEN  ('?Viewer') ('')
+WHEN  ('?ZoomOut') ('')
+
+%FieldGradientColorTypeIsVariable DEPEND %Control LONG TIMES 8
+WHEN  ('') (0)
+WHEN  ('?Acquire') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?List1') (0)
+WHEN  ('?Loc:ShowProgress') (0)
+WHEN  ('?RotRight') (0)
+WHEN  ('?Viewer') (0)
+WHEN  ('?ZoomOut') (0)
+
+%FieldGradientColorFrom DEPEND %Control LONG TIMES 8
+WHEN  ('') (-1)
+WHEN  ('?Acquire') (-1)
+WHEN  ('?Close') (-1)
+WHEN  ('?List1') (-1)
+WHEN  ('?Loc:ShowProgress') (-1)
+WHEN  ('?RotRight') (-1)
+WHEN  ('?Viewer') (-1)
+WHEN  ('?ZoomOut') (-1)
+
+%FieldGradientColorFromVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorFromIsVariable DEPEND %Control LONG TIMES 8
+WHEN  ('') (0)
+WHEN  ('?Acquire') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?List1') (0)
+WHEN  ('?Loc:ShowProgress') (0)
+WHEN  ('?RotRight') (0)
+WHEN  ('?Viewer') (0)
+WHEN  ('?ZoomOut') (0)
+
+%FieldGradientColorTo DEPEND %Control LONG TIMES 8
+WHEN  ('') (-1)
+WHEN  ('?Acquire') (-1)
+WHEN  ('?Close') (-1)
+WHEN  ('?List1') (-1)
+WHEN  ('?Loc:ShowProgress') (-1)
+WHEN  ('?RotRight') (-1)
+WHEN  ('?Viewer') (-1)
+WHEN  ('?ZoomOut') (-1)
+
+%FieldGradientColorToVariable DEPEND %Control DEFAULT TIMES 0
+
+%FieldGradientColorToIsVariable DEPEND %Control LONG TIMES 8
+WHEN  ('') (0)
+WHEN  ('?Acquire') (0)
+WHEN  ('?Close') (0)
+WHEN  ('?List1') (0)
+WHEN  ('?Loc:ShowProgress') (0)
+WHEN  ('?RotRight') (0)
+WHEN  ('?Viewer') (0)
+WHEN  ('?ZoomOut') (0)
+
+%PreLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%PostLookupProcedureParameters DEPEND %Control DEFAULT TIMES 0
+
+%CheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%CheckedDisableControl DEPEND %CheckedDisables DEFAULT TIMES 0
+
+%CheckedDisableControlAction DEPEND %CheckedDisables DEFAULT TIMES 8
+WHEN  ('')TIMES 0
+WHEN  ('?Acquire')TIMES 0
+WHEN  ('?Close')TIMES 0
+WHEN  ('?List1')TIMES 0
+WHEN  ('?Loc:ShowProgress')TIMES 0
+WHEN  ('?RotRight')TIMES 0
+WHEN  ('?Viewer')TIMES 0
+WHEN  ('?ZoomOut')TIMES 0
+
+%UnCheckedDisables DEPEND %Control MULTI LONG TIMES 0
+
+%UnCheckedDisableControl DEPEND %UnCheckedDisables DEFAULT TIMES 0
+
+%UnCheckedDisableControlAction DEPEND %UnCheckedDisables DEFAULT TIMES 8
+WHEN  ('')TIMES 0
+WHEN  ('?Acquire')TIMES 0
+WHEN  ('?Close')TIMES 0
+WHEN  ('?List1')TIMES 0
+WHEN  ('?Loc:ShowProgress')TIMES 0
+WHEN  ('?RotRight')TIMES 0
+WHEN  ('?Viewer')TIMES 0
+WHEN  ('?ZoomOut')TIMES 0
+
+[EMBED]
+EMBED %ImageExTwainVirtualMethodCodeSection
+[INSTANCES]
+WHEN '1'
+[INSTANCES]
+WHEN 'OnAcquired'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 1546
+PROPERTY:END
+Clear(ImageQ)
+DO PrepararDatos
+ImageQ.Text = EPL:EMP_LEGAJO & '_' & Loc:empleado
+Loc:PdfFilename = CLIP(ImageQ.Text) & '_' & FORMAT(DAU:DAU_INICIO_DATE,@D06-) & '_' & FORMAT(DAU:DAU_FIN_DATE,@D06-)
+ImageQ.Bitmap &= new (ImageExBitmapClass)
+ImageQ.Bitmap.Assign(Bmp)
+Add(ImageQ)
+
+?List1{PROP:SELECTED} = Records(ImageQ)
+Post(event:NewSelection, ?List1)
+[END]
+[END]
+[END]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 8030
+PROPERTY:END
+Loc:PixelType = IETPT:RGB
+Loc:ShowProgress = TRUE
+?List1{PROP:LINEHEIGHT}=12
+[END]
+[END]
+[END]
+EMBED %ControlEventHandling
+[INSTANCES]
+WHEN '?Acquire'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+ImageExTwain1.SetIndicators(loc:ShowProgress)
+ImageExTwain1.SetPixelType(Loc:PixelType)
+ImageExTwain1.Acquire(Loc:ShowUI)
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Select(?Viewer)
+[END]
+[END]
+WHEN '?Pdf'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[GROUP]
+PRIORITY 5000
+INSTANCE 5
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+if PictureDialogResult#
+    PdfSaver.Compression = IECA:JPEG
+    PdfSaver.BeginCreate(Loc:PdfFilename)
+    Loop i# = 1 to records(ImageQ)
+        Get(ImageQ, i#)
+        PdfSaver.AddPage(ImageQ.Bitmap)
+    end
+    PdfSaver.EndCreate()
+end
+[END]
+[END]
+WHEN '?Tiff'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[GROUP]
+PRIORITY 5000
+INSTANCE 3
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+   if PictureDialogResult#
+      TiffSaver.Compression = IECA:JPEG
+      Get(ImageQ, 1)
+      if ~errorcode()
+         ImageQ.Bitmap.SaveToFile(Loc:TiffFilename, TiffSaver)
+
+         loop i# = 2 to Records(ImageQ)
+            Get(ImageQ, i#)
+            if ~errorcode()
+               TiffSaver.InsertIntoFile(Loc:TiffFilename, -1, ImageQ.Bitmap)
+            end
+         end
+      end
+   end
+[END]
+[END]
+WHEN '?List1'
+[INSTANCES]
+WHEN 'NewSelection'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Get(ImageQ, Choice(?List1))
+if ~Errorcode()
+    Viewer.Bitmap.Assign (ImageQ.Bitmap)
+    Viewer.ZoomToFit()
+end
+[END]
+[END]
+WHEN '?Select'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+ImageExTwain1.SelectSource()
+[END]
+[END]
+WHEN '?Close'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Get(ImageQ, Choice(?List1))
+IF ~Errorcode()
+    Viewer.Bitmap.Assign (ImageQ.Bitmap)
+    Viewer.Bitmap.SaveToBlob(CME:CME_CERTIFICADOS,JpgSaver)
+    Viewer.Bitmap.SaveToBlob(CER:CER_CERTIFICADOS,JpgSaver)
+END
+[END]
+[END]
+WHEN '?RotLeft'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Get(ImageQ, Choice(?List1))
+if ~Errorcode()
+    Viewer.Bitmap.Rotate270(ImageQ.Bitmap)
+    Viewer.Bitmap.Assign (ImageQ.Bitmap)
+end
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Select(?Viewer)
+[END]
+[END]
+WHEN '?RotRight'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Get(ImageQ, Choice(?List1))
+if ~Errorcode()
+    Viewer.Bitmap.Rotate90(ImageQ.Bitmap)
+    Viewer.Bitmap.Assign (ImageQ.Bitmap)
+end
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Select(?Viewer)
+[END]
+[END]
+WHEN '?ZoomFit'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Get(ImageQ, Choice(?List1))
+!if ~Errorcode()
+    Viewer.ZoomToFit()
+    Viewer.Bitmap.Assign(ImageQ.Bitmap)
+!end
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Select(?Viewer)
+[END]
+[END]
+WHEN '?ZoomIn'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Get(ImageQ, Choice(?List1))
+if ~Errorcode()
+    Viewer.ZoomIn()
+    Viewer.Bitmap.Assign(ImageQ.Bitmap)
+end
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Select(?Viewer)
+[END]
+[END]
+WHEN '?ZoomOut'
+[INSTANCES]
+WHEN 'Accepted'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Get(ImageQ, Choice(?List1))
+if ~Errorcode()
+    Viewer.ZoomOut()
+    Viewer.Bitmap.Assign(ImageQ.Bitmap)
+end
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 5000
+PROPERTY:END
+Select(?Viewer)
+[END]
+[END]
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3800
+PROPERTY:END
+ImageQ      QUEUE, PRE()
+Text            STRING(30)
+Bitmap          &ImageExBitmapClass
+
+            END
+TheBitmap       ImageExBitmapClass
+JpgSaver    ImageExJpegSaverClass
+PdfSaver    ImageExPdfSaverClass
+TiffSaver   ImageExTiffSaverClass
+[END]
+EMBED %ProcedureRoutines
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+PrepararDatos       ROUTINE
+    !    ----- Nombre DB ----
+    empleado" = clip(EPL:EMP_NOMBRE)
+    val# = instring(',',empleado")
+    nombre" = CLIP(LEFT(empleado"[val#+1:LEN(empleado")]))
+    apellido" = CLIP(LEFT(empleado"[1:val#-1]))
+    !    ----- Apellido ----
+    val# = instring(' ',CLIP(LEFT(apellido")))
+    IF val# <> 0 THEN
+        ap" = apellido"[1:val#]
+    ELSE
+        ap" = apellido"
+    END
+    !    ----- Nombre -----
+    val# = instring(' ',CLIP(LEFT(nombre")))
+    IF val# <> 0 THEN
+        nom" = nombre"[1:val#]
+    ELSE
+        nom" = nombre"
+    END
+
+    Loc:empleado = CLIP(ap") & '_' & CLIP(nom")
+[END]
+[END]
+[ADDITION]
+NAME WinEvent WinEvent
+[INSTANCE]
+INSTANCE 4
+OWNER 4
+[PROMPTS]
+%DisableWinEvent LONG  (0)
+%CheckForCantCloseNowSetHere LONG  (1)
+%AutoDown LONG  (0)
+%NoAutoDown LONG  (0)
+%LocWindowsVisible DEFAULT  ('0')
+%WindowsVisibleAfterOpen LONG  (1)
+%AlertWinEventDebug LONG  (0)
+%DisplayCompileDate LONG  (0)
+%DisplayCompileDateFormat DEFAULT  ('@D6')
+%locNoHandleCloseDown LONG  (0)
+%locCloseDownWhenWindowCloses LONG  (0)
+%locCloseDownWhenWindowClosesCtrl DEFAULT  ('')
+%WinAlert MULTI LONG  ()
+%Mess DEPEND %WinAlert DEFAULT TIMES 0
+
+%Act1 DEPEND %WinAlert DEFAULT TIMES 0
+
+%act2 DEPEND %WinAlert DEFAULT TIMES 0
+
+%locCloseDownWhenWindowClosesSet LONG  (0)
+%SortListbox MULTI LONG  ()
+%ThisListbox DEPEND %SortListbox DEFAULT TIMES 0
+
+%ThisListboxHeader DEPEND %SortListbox MULTI DEFAULT TIMES 0
+
+%gloWinEventTesting LONG  (0)
+%gloWinEventTestingColor1 LONG  (15728618)
+%gloWinEventTestingColor2 LONG  (16777215)
+[ADDITION]
+NAME ImageExABC ImageExPictureDialog
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%ImageExPictureDialogMode DEFAULT  ('Save')
+%ImageExPictureDialogHeader DEFAULT  ('')
+%ImageExPictureDialogVariable FIELD  (Loc:PdfFilename)
+%ImageExPictureDialogInitialFilename DEFAULT  ('')
+%ImageExPictureDialogKeepDir LONG  (1)
+%ImageExPictureDialogMulti LONG  (0)
+%ImageExPictureDialogDefaultMasks LONG  (0)
+%ImageExPictureDialogAppendExtension LONG  (0)
+%ImageExPictureDialogDontRemember LONG  (0)
+%ImageExPictureDialogNoError LONG  (0)
+%ImageExPictureDialogMasks MULTI LONG  (1)
+%ImageExPictureDialogMaskDesc DEPEND %ImageExPictureDialogMasks DEFAULT TIMES 1
+WHEN  (1) ('Portable Document Format (*.pdf)')
+
+%ImageExPictureDialogMask DEPEND %ImageExPictureDialogMasks DEFAULT TIMES 1
+WHEN  (1) ('*.pdf')
+
+[INSTANCE]
+INSTANCE 3
+[PROMPTS]
+%ImageExPictureDialogMode DEFAULT  ('Save')
+%ImageExPictureDialogHeader DEFAULT  ('')
+%ImageExPictureDialogVariable FIELD  (Loc:TiffFilename)
+%ImageExPictureDialogInitialFilename DEFAULT  ('')
+%ImageExPictureDialogKeepDir LONG  (1)
+%ImageExPictureDialogMulti LONG  (0)
+%ImageExPictureDialogDefaultMasks LONG  (0)
+%ImageExPictureDialogAppendExtension LONG  (0)
+%ImageExPictureDialogDontRemember LONG  (0)
+%ImageExPictureDialogNoError LONG  (0)
+%ImageExPictureDialogMasks MULTI LONG  (1)
+%ImageExPictureDialogMaskDesc DEPEND %ImageExPictureDialogMasks DEFAULT TIMES 1
+WHEN  (1) ('Portable Document Format (*.pdf)')
+
+%ImageExPictureDialogMask DEPEND %ImageExPictureDialogMasks DEFAULT TIMES 1
+WHEN  (1) ('*.pdf')
+
+[ADDITION]
+NAME ImageExABC ImageExViewerControl
+[INSTANCE]
+INSTANCE 2
+[PROMPTS]
+%ImageExViewerObject DEFAULT  ('Viewer')
+%ImageExViewerSource DEFAULT  ('NONE')
+%ImageExViewerFile DEFAULT  ('')
+%ImageExViewerAddToProject LONG  (0)
+%ImageExViewerBlobName DEFAULT  ('')
+%ImageExViewerInitialZoom DEFAULT  ('ORIGINAL')
+%ImageExViewerZoomPercent DEFAULT  ('')
+%ImageExViewerStretchFilter DEFAULT  ('Linear')
+%ImageExViewerDrawMode DEFAULT  ('Opaque')
+%ImageExViewerMasterAlpha DEFAULT  ('255')
+%ImageExViewerColor LONG  (13882323)
+%ImageExViewerChessColor LONG  (-1)
+%ImageExViewerChessSize DEFAULT  ('')
+%ImageExViewerAllowFocus LONG  (1)
+%ImageExViewerPanMode LONG  (1)
+%ImageExViewerHotspotsActive LONG  (1)
+%ImageExViewerZoomWheel LONG  (1)
+%ImageExViewerScrollers LONG  (1)
+%ImageExViewerOverrideOnHotSpotEnter LONG  (0)
+%ImageExViewerOverrideOnHotSpotClick LONG  (0)
+%ImageExViewerOverrideOnHotSpotLeave LONG  (0)
+%ImageExViewerOverrideOnZoomChanged LONG  (0)
+%ImageExViewerOverrideOnSetFocus LONG  (0)
+%ImageExViewerOverrideOnKillFocus LONG  (0)
+%ImageExViewerOverrideOnPaintBuffer LONG  (0)
+%ImageExViewerOverrideOnMouseDown LONG  (0)
+%ImageExViewerOverrideOnMouseUp LONG  (0)
+%ImageExViewerOverrideOnMouseEnter LONG  (0)
+%ImageExViewerOverrideOnMouseMove LONG  (0)
+%ImageExViewerOverrideOnMouseLeave LONG  (0)
+%ImageExViewerFieldOverrideStretchFilter LONG  (0)
+%ImageExViewerStretchFilterField FIELD  ()
+%ImageExViewerFieldOverrideDrawMode LONG  (0)
+%ImageExViewerDrawModeField FIELD  ()
+%ImageExViewerFieldOverrideAlpha LONG  (0)
+%ImageExViewerAlphaField FIELD  ()
+%ImageExViewerFieldOverrideAllowFocus LONG  (0)
+%ImageExViewerAllowFocusField FIELD  ()
+%ImageExViewerFieldOverrideColor LONG  (0)
+%ImageExViewerColorField FIELD  ()
+%ImageExViewerFieldOverrideChessOption LONG  (0)
+%ImageExViewerChessOptionField FIELD  ()
+%ImageExViewerFieldOverrideChessColor LONG  (0)
+%ImageExViewerChessColorField FIELD  ()
+%ImageExViewerChessSizeField FIELD  ()
+%ImageExViewerFieldOverrideScrollers LONG  (0)
+%ImageExViewerScrollersField FIELD  ()
+%ImageExViewerFieldOverrideInitialZoom LONG  (0)
+%ImageExViewerInitialZoomField FIELD  ()
+%ImageExViewerZoomPercentField FIELD  ()
+%ImageExViewerFieldOverrideMouseModes LONG  (0)
+%ImageExViewerPanModeField FIELD  ()
+%ImageExViewerHotspotsActiveField FIELD  ()
+%ImageExViewerZoomWheelField FIELD  ()
+[ADDITION]
+NAME ImageExABC ImageExTwainDeclaration
+[INSTANCE]
+INSTANCE 1
+[PROMPTS]
+%ImageExTwainObject DEFAULT  ('ImageExTwain1')
+%ImageExTwainOverrideOnAcquired LONG  (1)
+%ImageExTwainOverrideOnAcquireCancelled LONG  (1)
+%ImageExTwainOverrideOnSourceDisabled LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 6
+[WINDOW]
+Window  WINDOW('Certificado'),AT(,,445,283),FONT('MS Sans Serif',8,,FONT:regular),RESIZE,AUTO, |
+          GRAY,SYSTEM
+          CHECK('&Show scanner UI'),AT(19,74),USE(Loc:ShowUi),RIGHT,HIDE,#ORIG(Loc:ShowUi), |
+            #ORDINAL(1)
+          REGION,AT(140,28,300,250),USE(?Viewer),#ORIG(?Viewer),#SEQ(2),#ORDINAL(2)
+          BUTTON,AT(140,5,18,18),USE(?Acquire),ICON('scanner.ico'),DEFAULT,#ORDINAL(3)
+          BUTTON('Crear &PDF'),AT(43,201),USE(?Pdf),HIDE,#ORIG(?Button2),#ORDINAL(4)
+          BUTTON('Create multi-page &TIFF'),AT(26,110),USE(?Tiff),HIDE,#ORIG(?Button3),#ORDINAL(5)
+          BUTTON('S&eleccionar Scanner'),AT(5,5,60,18),USE(?Select),FONT('Microsoft Sans Serif', |
+            8,,FONT:regular),#ORIG(?Button4),#ORDINAL(6)
+          CHECK('Show &progress indicator'),AT(19,90),USE(Loc:ShowProgress),RIGHT,HIDE,#ORIG(Loc:ShowProgress), |
+            #ORDINAL(7)
+          OPTION('Pixel Type'),AT(7,154,127,28),USE(loc:PixelType),BOXED,HIDE,#ORIG(?Option1), |
+            #ORDINAL(8)
+            RADIO('B/W'),AT(15,166),USE(?loc:PixelType:Radio1),VALUE('0'),#ORIG(?loc:PixelType:Radio1), |
+              #ORDINAL(9)
+            RADIO('Grayscale'),AT(47,166),USE(?loc:PixelType:Radio1:2),VALUE('1'),#ORIG(?loc:PixelType:Radio1), |
+              #ORDINAL(10)
+            RADIO('RGB'),AT(95,166),USE(?loc:PixelType:Radio1:3),VALUE('2'),#ORIG(?loc:PixelType:Radio1:2), |
+              #ORDINAL(11)
+          END
+          LIST,AT(5,28,130,250),USE(?List1),VSCROLL,FORMAT('80L(2)~Text~@s20@'),FROM(ImageQ), |
+            #ORIG(?List1),#ORDINAL(12)
+          BUTTON('&Generar'),AT(387,5,53,18),USE(?Close),FONT('Microsoft Sans Serif',10,,FONT:bold), |
+            #ORIG(?Close),#SEQ(6),#ORDINAL(13)
+          BUTTON,AT(272,5,18,18),USE(?RotLeft),ICON('rotleft.ico'),#ORDINAL(14)
+          BUTTON,AT(294,5,18,18),USE(?RotRight),ICON('rotright.ico'),#ORDINAL(15)
+          BUTTON,AT(184,5,18,18),USE(?ZoomFit),ICON('ZoomToFit.ico'),#ORDINAL(16)
+          BUTTON,AT(206,5,18,18),USE(?ZoomIn),FONT('Microsoft Sans Serif',,,FONT:regular), |
+            ICON('zoomIn.ico'),#ORDINAL(17)
+          BUTTON,AT(228,5,18,18),USE(?ZoomOut),ICON('zoomOut.ico'),#ORDINAL(18)
+        END
+

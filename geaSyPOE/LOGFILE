@@ -1,0 +1,28 @@
+
+2022.02.02 10:43:21 (Wed)------------Start of Session-----------------
+Blat v3.2.22 (build : Jul 19 2019 23:25:36)
+32-bit Windows, Full, Unicode
+Blat saw and processed these options, and was confused by the last one...
+    -f sistemas@corpico.com.ar
+    -to cesarbarrera@corpico.com.ar
+    -server mail.corpico.com.ar
+    -u sistemas@corpico.com.ar
+    -pw ssduck341ia
+    -subject [Mensaje
+    de
+Do not understand argument: de
+2022.02.02 10:43:21 (Wed)-------------End of Session------------------
+
+2022.02.02 10:47:44 (Wed)------------Start of Session-----------------
+Blat v3.2.22 (build : Jul 19 2019 23:25:36)
+32-bit Windows, Full, Unicode
+Blat saw and processed these options, and was confused by the last one...
+    -f sistemas@corpico.com.ar
+    -to cesarbarrera@corpico.com.ar
+    -server mail.corpico.com.ar
+    -u sistemas@corpico.com.ar
+    -pw ssduck341ia
+    -subject [Mensaje
+    de
+Do not understand argument: de
+2022.02.02 10:47:44 (Wed)-------------End of Session------------------

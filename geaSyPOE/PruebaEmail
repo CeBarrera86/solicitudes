@@ -1,0 +1,3 @@
+Feb 02 10:17:16 cebarrera sendEmail.exe[9040]: ERROR => TLS setup failed: SSL connect attempt failed with unknown errorerror:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol
+Feb 02 10:18:51 cebarrera sendEmail.exe[15636]: ERROR => TLS setup failed: SSL connect attempt failed with unknown errorerror:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol
+Feb 02 10:20:40 cebarrera sendEmail.exe[5176]: ERROR => TLS setup failed: SSL connect attempt failed with unknown errorerror:140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol

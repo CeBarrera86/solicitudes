@@ -1,0 +1,1695 @@
+[APPLICATION]
+PROCEDURE Main
+DICTIONARY 'C:\Proyectos_Clarion\geaSyPOE\solicitud.dct'
+[COMMON]
+FROM ABC
+[PROMPTS]
+%ActiveInvisible  DEFAULT (0)
+%AllowUnFilled    DEFAULT (0)
+%RetainRow        DEFAULT (0)
+%ResetOnGainFocus DEFAULT (0)
+%AutoToolBar      DEFAULT (1)
+%AutoRefresh      DEFAULT (1)
+[PROCEDURE]
+NAME Main
+[COMMON]
+DESCRIPTION 'Wizard Application for C:\Proyectos_Clarion\geaSyPOE\solicitud.dct'
+FROM ABC Frame
+[DATA]
+[FILES]
+[OTHERS]
+PRESUPUESTO_OBRA_ELECTRICA
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 6
+WHEN  ('?BrowsePRESUPUESTO_OBRA_ELECTRICA') ('Call a Procedure')
+WHEN  ('?BrowseSOLICITUD_OBRA_ELECTRICA') ('Call a Procedure')
+WHEN  ('?BrowseTIPO_DE_OBRA') ('Call a Procedure')
+WHEN  ('?ReportPRESUPUESTO_OBRA_ELECTRICA') ('Call a Procedure')
+WHEN  ('?ReportSOLICITUD_OBRA_ELECTRICA') ('Call a Procedure')
+WHEN  ('?ReportTIPO_DE_OBRA') ('Call a Procedure')
+
+%ButtonRunName DEPEND %Control STRING TIMES 6
+WHEN  ('?BrowsePRESUPUESTO_OBRA_ELECTRICA') ('')
+WHEN  ('?BrowseSOLICITUD_OBRA_ELECTRICA') ('')
+WHEN  ('?BrowseTIPO_DE_OBRA') ('')
+WHEN  ('?ReportPRESUPUESTO_OBRA_ELECTRICA') ('')
+WHEN  ('?ReportSOLICITUD_OBRA_ELECTRICA') ('')
+WHEN  ('?ReportTIPO_DE_OBRA') ('')
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 6
+WHEN  ('?BrowsePRESUPUESTO_OBRA_ELECTRICA') ('')
+WHEN  ('?BrowseSOLICITUD_OBRA_ELECTRICA') ('')
+WHEN  ('?BrowseTIPO_DE_OBRA') ('')
+WHEN  ('?ReportPRESUPUESTO_OBRA_ELECTRICA') ('')
+WHEN  ('?ReportSOLICITUD_OBRA_ELECTRICA') ('')
+WHEN  ('?ReportTIPO_DE_OBRA') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 6
+WHEN  ('?BrowsePRESUPUESTO_OBRA_ELECTRICA') (BrowsePRESUPUESTO_OBRA_ELECTRICA)
+WHEN  ('?BrowseSOLICITUD_OBRA_ELECTRICA') (BrowseSOLICITUD_OBRA_ELECTRICA)
+WHEN  ('?BrowseTIPO_DE_OBRA') (BrowseTIPO_DE_OBRA)
+WHEN  ('?ReportPRESUPUESTO_OBRA_ELECTRICA') (ReportPRESUPUESTO_OBRA_ELECTRICA)
+WHEN  ('?ReportSOLICITUD_OBRA_ELECTRICA') (ReportSOLICITUD_OBRA_ELECTRICA)
+WHEN  ('?ReportTIPO_DE_OBRA') (ReportTIPO_DE_OBRA)
+
+%ButtonThread DEPEND %Control LONG TIMES 6
+WHEN  ('?BrowsePRESUPUESTO_OBRA_ELECTRICA') (1)
+WHEN  ('?BrowseSOLICITUD_OBRA_ELECTRICA') (1)
+WHEN  ('?BrowseTIPO_DE_OBRA') (1)
+WHEN  ('?ReportPRESUPUESTO_OBRA_ELECTRICA') (1)
+WHEN  ('?ReportSOLICITUD_OBRA_ELECTRICA') (1)
+WHEN  ('?ReportTIPO_DE_OBRA') (1)
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 6
+WHEN  ('?BrowsePRESUPUESTO_OBRA_ELECTRICA') (50000)
+WHEN  ('?BrowseSOLICITUD_OBRA_ELECTRICA') (50000)
+WHEN  ('?BrowseTIPO_DE_OBRA') (50000)
+WHEN  ('?ReportPRESUPUESTO_OBRA_ELECTRICA') (50000)
+WHEN  ('?ReportSOLICITUD_OBRA_ELECTRICA') (50000)
+WHEN  ('?ReportTIPO_DE_OBRA') (50000)
+
+%ButtonParameters DEPEND %Control STRING TIMES 6
+WHEN  ('?BrowsePRESUPUESTO_OBRA_ELECTRICA') ('')
+WHEN  ('?BrowseSOLICITUD_OBRA_ELECTRICA') ('')
+WHEN  ('?BrowseTIPO_DE_OBRA') ('')
+WHEN  ('?ReportPRESUPUESTO_OBRA_ELECTRICA') ('')
+WHEN  ('?ReportSOLICITUD_OBRA_ELECTRICA') ('')
+WHEN  ('?ReportTIPO_DE_OBRA') ('')
+
+%ButtonRequest DEPEND %Control STRING TIMES 6
+WHEN  ('?BrowsePRESUPUESTO_OBRA_ELECTRICA') ('')
+WHEN  ('?BrowseSOLICITUD_OBRA_ELECTRICA') ('')
+WHEN  ('?BrowseTIPO_DE_OBRA') ('')
+WHEN  ('?ReportPRESUPUESTO_OBRA_ELECTRICA') ('')
+WHEN  ('?ReportSOLICITUD_OBRA_ELECTRICA') ('')
+WHEN  ('?ReportTIPO_DE_OBRA') ('')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[EMBED]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+SQLOpenWindow        WINDOW('Initializing Database'),AT(,,208,26),FONT('Microsoft Sans Serif',8,,FONT:regular),CENTER,GRAY,DOUBLE
+                       STRING('This process could take several seconds.'),AT(27,12)
+                       IMAGE(Icon:Connect),AT(4,4,23,17)
+                       STRING('Please wait while the program connects to the database.'),AT(27,3)
+                     END
+
+[END]
+[END]
+[EMBED]
+EMBED %WindowManagerMethodCodeSection
+[INSTANCES]
+WHEN 'Init'
+[INSTANCES]
+WHEN '(),BYTE'
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 6400
+PROPERTY:END
+SETCURSOR(Cursor:Wait)
+OPEN(SQLOpenWindow)
+ACCEPT
+  IF EVENT() = Event:OpenWindow
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 7800
+PROPERTY:END
+    POST(EVENT:CloseWindow)
+  END
+END
+CLOSE(SQLOpenWindow)
+SETCURSOR()
+[END]
+[END]
+[END]
+[END]
+[ADDITION]
+NAME ABC FrameBrowseControl
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[WINDOW]
+AppFrame APPLICATION('Application'),AT(,,505,318),STATUS(-1,80,120,45),MAX,RESIZE,FONT('Microsoft Sans Serif',8,0,400,1),CENTER,SYSTEM
+  MENUBAR,USE(?Menubar)
+       MENU('&Archivo'),USE(?FileMenu)
+       ITEM('&Impresora'),USE(?PrintSetup),MSG('Configurar Impresora'),STD(STD:PrintSetup)
+       ITEM,SEPARATOR
+       ITEM('&Salir'),USE(?Exit),MSG('Cerrar aplicación'),STD(STD:Close)
+       END
+       MENU('&Browse'),USE(?BrowseMenu)
+       ITEM('Browse the PRESUPUESTO_OBRA_ELECTRICA file'),USE(?BrowsePRESUPUESTO_OBRA_ELECTRICA),MSG('Browse PRESUPUESTO_OBRA_ELECTRICA')
+       ITEM('Browse the SOLICITUD_OBRA_ELECTRICA file'),USE(?BrowseSOLICITUD_OBRA_ELECTRICA),MSG('Browse SOLICITUD_OBRA_ELECTRICA')
+       ITEM('Browse the TIPO_DE_OBRA file'),USE(?BrowseTIPO_DE_OBRA),MSG('Browse TIPO_DE_OBRA')
+       END
+       MENU('&Reports'),USE(?ReportMenu),MSG('Report data')
+       ITEM('Print the PRESUPUESTO_OBRA_ELECTRICA file'),USE(?ReportPRESUPUESTO_OBRA_ELECTRICA),MSG('Print in record order')
+       ITEM('Print the SOLICITUD_OBRA_ELECTRICA file'),USE(?ReportSOLICITUD_OBRA_ELECTRICA),MSG('Print in record order')
+       ITEM('Print the TIPO_DE_OBRA file'),USE(?ReportTIPO_DE_OBRA),MSG('Print in record order')
+       END
+  END
+  TOOLBAR,AT(0,0,400,16),USE(?Toolbar)
+    BUTTON,AT(4,2,14,14),TIP('Go to the First Page'),USE(?Toolbar:Top,Toolbar:Top),DISABLE,ICON('WAVCRFIRST.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Top,Toolbar:Top)
+    BUTTON,AT(18,2,14,14),TIP('Go to the Prior Page'),USE(?Toolbar:PageUp,Toolbar:PageUp),DISABLE,ICON('WAVCRPRIOR.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:PageUp,Toolbar:PageUp)
+    BUTTON,AT(32,2,14,14),TIP('Go to the Prior Record'),USE(?Toolbar:Up,Toolbar:Up),DISABLE,ICON('WAVCRUP.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Up,Toolbar:Up)
+    BUTTON,AT(46,2,14,14),TIP('Locate record'),USE(?Toolbar:Locate,Toolbar:Locate),DISABLE,ICON('WAFIND.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Locate,Toolbar:Locate)
+    BUTTON,AT(60,2,14,14),TIP('Go to the Next Record'),USE(?Toolbar:Down,Toolbar:Down),DISABLE,ICON('WAVCRDOWN.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Down,Toolbar:Down)
+    BUTTON,AT(74,2,14,14),TIP('Go to the Next Page'),USE(?Toolbar:PageDown,Toolbar:PageDown),DISABLE,ICON('WAVCRNEXT.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:PageDown,Toolbar:PageDown)
+    BUTTON,AT(88,2,14,14),TIP('Go to the Last Page'),USE(?Toolbar:Bottom,Toolbar:Bottom),DISABLE,ICON('WAVCRLAST.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Bottom,Toolbar:Bottom)
+    BUTTON,AT(102,2,14,14),TIP('Select This Record'),USE(?Toolbar:Select,Toolbar:Select),DISABLE,ICON('WAMARK.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Select,Toolbar:Select)
+    BUTTON,AT(116,2,14,14),TIP('Insert a New Record'),USE(?Toolbar:Insert,Toolbar:Insert),DISABLE,ICON('WAINSERT.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Insert,Toolbar:Insert)
+    BUTTON,AT(130,2,14,14),TIP('Edit This Record'),USE(?Toolbar:Change,Toolbar:Change),DISABLE,ICON('WACHANGE.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Change,Toolbar:Change)
+    BUTTON,AT(144,2,14,14),TIP('Delete This Record'),USE(?Toolbar:Delete,Toolbar:Delete),DISABLE,ICON('WADELETE.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Delete,Toolbar:Delete)
+    BUTTON,AT(158,2,14,14),TIP('Previous value'),USE(?Toolbar:History,Toolbar:History),DISABLE,ICON('WADITTO.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:History,Toolbar:History)
+    BUTTON,AT(172,2,14,14),TIP('Get Help'),USE(?Toolbar:Help,Toolbar:Help),DISABLE,ICON('WAVCRHELP.ICO'),FLAT,#SEQ(1),#ORIG(?Toolbar:Help,Toolbar:Help)
+  END
+ END
+[PROCEDURE]
+NAME BrowsePRESUPUESTO_OBRA_ELECTRICA
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'PRESUPUESTO_OBRA_ELECTRICA'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+PRESUPUESTO_OBRA_ELECTRICA
+[INSTANCE]
+1
+[KEY]
+POE:PK_POE_ID
+[OTHERS]
+SOLICITUD_OBRA_ELECTRICA
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectSOLICITUD_OBRA_ELECTRICA') ('Call a Procedure')
+
+%ButtonRunName DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectSOLICITUD_OBRA_ELECTRICA') ('')
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectSOLICITUD_OBRA_ELECTRICA') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?SelectSOLICITUD_OBRA_ELECTRICA') (SelectSOLICITUD_OBRA_ELECTRICA)
+
+%ButtonThread DEPEND %Control LONG TIMES 1
+WHEN  ('?SelectSOLICITUD_OBRA_ELECTRICA') (0)
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 1
+WHEN  ('?SelectSOLICITUD_OBRA_ELECTRICA') (025000)
+
+%ButtonParameters DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectSOLICITUD_OBRA_ELECTRICA') ('')
+
+%ButtonRequest DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectSOLICITUD_OBRA_ELECTRICA') ('Select')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (1)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  (1)
+%SortCondition DEPEND %SortOrder @S255 TIMES 1
+WHEN  (1) ('CHOICE(?CurrentTab) = 2')
+%SortKey DEPEND %SortOrder KEY TIMES 1
+WHEN  (1) (POE:FK_POE_SOE_ID)
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 1
+WHEN  (1) ('')
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 1
+WHEN  (1) (POE:POE_SOE_ID)
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) (POE:POE_SOE_ID)
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeFile DEPEND %SortOrder FILE TIMES 1
+WHEN  (1) (SOLICITUD_OBRA_ELECTRICA)
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('File Relationship')
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('Fixed Thumb')
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 1
+WHEN  (1) ('Runtime')
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 1
+WHEN  (1)TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (1)
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (0)
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (0)
+[ADDITION]
+NAME ABC BrowseViewButton
+[INSTANCE]
+INSTANCE 2
+PARENT 1
+[ADDITION]
+NAME ABC BrowseUpdateButtons
+[INSTANCE]
+INSTANCE 3
+PARENT 1
+PROCPROP
+[PROMPTS]
+%UpdateProcedure PROCEDURE  (UpdatePRESUPUESTO_OBRA_ELECTRICA)
+%EditViaPopup LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC HelpButton
+[INSTANCE]
+INSTANCE 5
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 6
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('PRESUPUESTO_OBRA_ELECTRICA'),AT(,,358,198),IMM,RESIZE,GRAY,MDI,HLP('BrowsePRESUPUESTO_OBRA_ELECTRICA'),FONT('Microsoft Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,30,342,124),USE(?Browse:1),MSG('PRESUPUESTO_OBRA_ELECTRICA'),IMM,HVSCROLL,|
+      FORMAT('64R(2)|M~POE ID~C(0)@n-14@64R(2)|M~POE SOE ID~C(0)@n-14@64L(2)|M~POE ESTADO~L(2)@s15@64R(2)|M~POE NRO OBRA~C(0)@n-14@80L(2)|M~POE USUARIO~L(2)@s20@80R(2)|M~POE FECHA DATE~C(0)@d17@80R(2)|M~POE FECHA TIME~C(0)@t7@80R(2)|M~POE UPDATE DATE~C(0)@d17@80R(2)|M~POE UPDATE TIME~C(0)@t7@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(POE:POE_ID,POE:POE_SOE_ID,POE:POE_ESTADO,POE:POE_NRO_OBRA,POE:POE_USUARIO,POE:POE_FECHA_DATE,POE:POE_FECHA_TIME,POE:POE_UPDATE_DATE,POE:POE_UPDATE_TIME)
+    BUTTON('&View'),AT(142,158,49,14),USE(?View:2),ICON('WAVIEW.ICO'),FLAT,MSG('View Record'),TIP('View Record'),LEFT,#SEQ(2),#ORIG(?View)
+    BUTTON('&Insert'),AT(195,158,49,14),USE(?Insert:3),ICON('WAINSERT.ICO'),FLAT,MSG('Insert a Record'),TIP('Insert a Record'),LEFT,#SEQ(3),#ORIG(?Insert),#LINK(?Change:3)
+    BUTTON('&Change'),AT(248,158,49,14),USE(?Change:3),ICON('WACHANGE.ICO'),FLAT,MSG('Change the Record'),TIP('Change the Record'),LEFT,DEFAULT,#SEQ(3),#ORIG(?Change),#LINK(?Delete:3)
+    BUTTON('&Delete'),AT(301,158,49,14),USE(?Delete:3),ICON('WADELETE.ICO'),FLAT,MSG('Delete the Record'),TIP('Delete the Record'),LEFT,#SEQ(3),#ORIG(?Delete),#LINK(?Insert:3)
+  SHEET,AT(4,4,350,172),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('&1) PK_POE_ID'),USE(?Tab:2)
+    END
+    TAB('&2) FK_POE_SOE_ID'),USE(?Tab:3)
+       BUTTON('Select SOLICITUD_OBRA_ELECTRICA'),ICON('WAPARENT.ICO'),FLAT,MSG('Select Parent Field'),TIP('Select Parent Field'),LEFT,USE(?SelectSOLICITUD_OBRA_ELECTRICA),AT(8,158,118,14)
+    END
+  END
+  BUTTON('&Close'),AT(252,180,49,14),USE(?Close),ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'),TIP('Close Window'),LEFT,#SEQ(4),#ORIG(?Close)
+  BUTTON('&Help'),AT(305,180,49,14),USE(?Help),ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'),TIP('See Help Window'),LEFT,STD(STD:Help),#SEQ(5),#ORIG(?Help)
+ END
+[PROCEDURE]
+NAME ReportPRESUPUESTO_OBRA_ELECTRICA
+CATEGORY 'Report'
+[COMMON]
+DESCRIPTION 'Print the PRESUPUESTO_OBRA_ELECTRICA File'
+FROM ABC Report
+[DATA]
+[FILES]
+[PRIMARY]
+PRESUPUESTO_OBRA_ELECTRICA
+[INSTANCE]
+0
+[PROMPTS]
+%EnablePrintPreview LONG  (1)
+%MaximizePreviewWindow LONG  (1)
+%InitialZoom DEFAULT  ('No Zoom')
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC ReportDateStamp
+[INSTANCE]
+INSTANCE 1
+[PROMPTS]
+%TimeStampFormat DEFAULT  ('@D17')
+%UseSystemTime DEFAULT  (1)
+[ADDITION]
+NAME ABC ReportTimeStamp
+[INSTANCE]
+INSTANCE 2
+[PROMPTS]
+%DateStampFormat DEFAULT  ('@T7')
+%UseSystemDate DEFAULT  (1)
+[WINDOW]
+ProgressWindow WINDOW('Report PRESUPUESTO_OBRA_ELECTRICA'),|
+       AT(,,142,59),TIMER(1),GRAY,DOUBLE,FONT('Microsoft Sans Serif',8,,400,1),CENTER
+       PROGRESS,USE(Progress:Thermometer),AT(15,15,111,12),RANGE(0,100),#ORIG(Progress:Thermometer)
+       STRING(''),AT(0,3,141,10),USE(?Progress:UserString),CENTER,#ORIG(?Progress:UserString)
+       STRING(''),AT(0,30,141,10),USE(?Progress:PctText),CENTER,#ORIG(?Progress:PctText)
+       BUTTON('Cancel'),AT(46,42,49,15),USE(?Progress:Cancel),ICON('WACANCEL.ICO'),FLAT,MSG('Cancel Report'),TIP('Cancel Report'),LEFT,#ORIG(?Progress:Cancel)
+     END
+[REPORT]
+Report REPORT('PRESUPUESTO_OBRA_ELECTRICA Report'),AT(250,1190,7750,9998),PRE(RPT),PAPER(PAPER:A4),LANDSCAPE,FONT('Microsoft Sans Serif',8,,400,1),THOUS
+       HEADER,AT(250,250,7750,940),USE(?Header),FONT('Microsoft Sans Serif',8,,400,1)
+         STRING('Report PRESUPUESTO_OBRA_ELECTRICA file'),AT(0,20,7750,220),USE(?ReportTitle),CENTER,FONT('Microsoft Sans Serif',8,,400,1)
+         BOX,AT(0,350,7750,610),COLOR(00H),USE(?HeaderBox)
+         LINE,AT(1937,350,0,610),COLOR(00H),USE(?HeaderLine:1)
+         LINE,AT(3874,350,0,610),COLOR(00H),USE(?HeaderLine:2)
+         LINE,AT(5811,350,0,610),COLOR(00H),USE(?HeaderLine:3)
+         STRING('POE ID'),AT(50,390,1837,170),TRN,USE(?HeaderTitle:1)
+         STRING('POE SOE ID'),AT(1987,390,1837,170),TRN,USE(?HeaderTitle:2)
+         STRING('POE ESTADO'),AT(3924,390,1837,170),TRN,USE(?HeaderTitle:3)
+         STRING('POE NRO OBRA'),AT(5861,390,1837,170),TRN,USE(?HeaderTitle:4)
+         STRING('POE USUARIO'),AT(50,570,1837,170),TRN,USE(?HeaderTitle:5)
+         STRING('POE FECHA DATE'),AT(1987,570,1837,170),TRN,USE(?HeaderTitle:6)
+         STRING('POE FECHA TIME'),AT(3924,570,1837,170),TRN,USE(?HeaderTitle:7)
+         STRING('POE UPDATE DATE'),AT(5861,570,1837,170),TRN,USE(?HeaderTitle:8)
+         STRING('POE UPDATE TIME'),AT(50,750,1837,170),TRN,USE(?HeaderTitle:9)
+       END
+Detail DETAIL,AT(0,0,7750,750),USE(?Detail)
+         LINE,AT(0,0,0,750),COLOR(00H),USE(?DetailLine:0)
+         LINE,AT(1937,0,0,750),COLOR(00H),USE(?DetailLine:1)
+         LINE,AT(3874,0,0,750),COLOR(00H),USE(?DetailLine:2)
+         LINE,AT(5811,0,0,750),COLOR(00H),USE(?DetailLine:3)
+         LINE,AT(7750,0,0,750),COLOR(00H),USE(?DetailLine:4)
+         STRING(@n-14),USE(POE:POE_ID),AT(50,50,1837,170)
+         STRING(@n-14),USE(POE:POE_SOE_ID),AT(1987,50,1837,170)
+         STRING(@s15),USE(POE:POE_ESTADO),AT(3924,50,1837,170)
+         STRING(@n-14),USE(POE:POE_NRO_OBRA),AT(5861,50,1837,170)
+         STRING(@s20),USE(POE:POE_USUARIO),AT(50,230,1837,170)
+         STRING(@d17),USE(POE:POE_FECHA_DATE),AT(1987,230,1837,170)
+         STRING(@t7),USE(POE:POE_FECHA_TIME),AT(3924,230,1837,170)
+         STRING(@d17),USE(POE:POE_UPDATE_DATE),AT(5861,230,1837,170)
+         STRING(@t7),USE(POE:POE_UPDATE_TIME),AT(50,410,1837,170)
+         LINE,AT(0,750,7750,0),COLOR(00H),USE(?DetailEndLine)
+       END
+       FOOTER,AT(250,11188,7750,250),USE(?Footer)
+         STRING('Date:'),AT(115,52,344,135),USE(?ReportDatePrompt:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(1),#ORIG(?ReportDatePrompt)
+         STRING('<<-- Date Stamp -->'),AT(490,52,927,135),USE(?ReportDateStamp:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(1),#ORIG(?ReportDateStamp)
+         STRING('Time:'),AT(1625,52,271,135),USE(?ReportTimePrompt:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(2),#ORIG(?ReportTimePrompt)
+         STRING('<<-- Time Stamp -->'),AT(1927,52,927,135),USE(?ReportTimeStamp:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(2),#ORIG(?ReportTimeStamp)
+         STRING(@pPage <<#p),AT(6950,52,700,135),FONT('Arial',8,,FONT:regular),PAGENO,USE(?PageCount:2)
+       END
+       FORM,AT(250,250,7750,11188),USE(?Form),FONT('Microsoft Sans Serif',8,,400,1)
+         IMAGE(''),AT(0,0,7750,11188),USE(?FormImage),TILED
+       END
+     END
+[PROCEDURE]
+NAME BrowseSOLICITUD_OBRA_ELECTRICA
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'SOLICITUD_OBRA_ELECTRICA'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+SOLICITUD_OBRA_ELECTRICA
+[INSTANCE]
+1
+[KEY]
+SOE:PK_SOE_ID
+[OTHERS]
+TIPO_DE_OBRA
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectTIPO_DE_OBRA') ('Call a Procedure')
+
+%ButtonRunName DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectTIPO_DE_OBRA') ('')
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectTIPO_DE_OBRA') ('')
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?SelectTIPO_DE_OBRA') (SelectTIPO_DE_OBRA)
+
+%ButtonThread DEPEND %Control LONG TIMES 1
+WHEN  ('?SelectTIPO_DE_OBRA') (0)
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 1
+WHEN  ('?SelectTIPO_DE_OBRA') (025000)
+
+%ButtonParameters DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectTIPO_DE_OBRA') ('')
+
+%ButtonRequest DEPEND %Control STRING TIMES 1
+WHEN  ('?SelectTIPO_DE_OBRA') ('Select')
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (1)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  (1)
+%SortCondition DEPEND %SortOrder @S255 TIMES 1
+WHEN  (1) ('CHOICE(?CurrentTab) = 2')
+%SortKey DEPEND %SortOrder KEY TIMES 1
+WHEN  (1) (SOE:FK_SOE_TIPO)
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 1
+WHEN  (1) ('')
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 1
+WHEN  (1) (SOE:SOE_TIPO)
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) (SOE:SOE_TIPO)
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeFile DEPEND %SortOrder FILE TIMES 1
+WHEN  (1) (TIPO_DE_OBRA)
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('File Relationship')
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('Fixed Thumb')
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 1
+WHEN  (1) ('Runtime')
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 1
+WHEN  (1)TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (1)
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (0)
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (0)
+[ADDITION]
+NAME ABC BrowseViewButton
+[INSTANCE]
+INSTANCE 2
+PARENT 1
+[ADDITION]
+NAME ABC BrowseUpdateButtons
+[INSTANCE]
+INSTANCE 3
+PARENT 1
+PROCPROP
+[PROMPTS]
+%UpdateProcedure PROCEDURE  (UpdateSOLICITUD_OBRA_ELECTRICA)
+%EditViaPopup LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC HelpButton
+[INSTANCE]
+INSTANCE 5
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 6
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('SOLICITUD_OBRA_ELECTRICA'),AT(,,358,198),IMM,RESIZE,GRAY,MDI,HLP('BrowseSOLICITUD_OBRA_ELECTRICA'),FONT('Microsoft Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,30,342,124),USE(?Browse:1),MSG('SOLICITUD_OBRA_ELECTRICA'),IMM,HVSCROLL,|
+      FORMAT('64R(2)|M~SOE ID~C(0)@n-14@64R(2)|M~SOE DNI~C(0)@n-14@80L(2)|M~SOE APELLIDO~L(2)@s30@80L(2)|M~SOE NOMBRE~L(2)@s30@80L(2)|M~SOE CALLE~L(2)@s20@44L(2)|M~SOE ALTURA~L(2)@s6@36L(2)|M~SOE PISO~L(2)@s3@36L(2)|M~SOE DPTO~L(2)@s3@80L(2)|M~SOE TELEFONO~L(2)@s20@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(SOE:SOE_ID,SOE:SOE_DNI,SOE:SOE_APELLIDO,SOE:SOE_NOMBRE,SOE:SOE_CALLE,SOE:SOE_ALTURA,SOE:SOE_PISO,SOE:SOE_DPTO,SOE:SOE_TELEFONO)
+    BUTTON('&View'),AT(142,158,49,14),USE(?View:2),ICON('WAVIEW.ICO'),FLAT,MSG('View Record'),TIP('View Record'),LEFT,#SEQ(2),#ORIG(?View)
+    BUTTON('&Insert'),AT(195,158,49,14),USE(?Insert:3),ICON('WAINSERT.ICO'),FLAT,MSG('Insert a Record'),TIP('Insert a Record'),LEFT,#SEQ(3),#ORIG(?Insert),#LINK(?Change:3)
+    BUTTON('&Change'),AT(248,158,49,14),USE(?Change:3),ICON('WACHANGE.ICO'),FLAT,MSG('Change the Record'),TIP('Change the Record'),LEFT,DEFAULT,#SEQ(3),#ORIG(?Change),#LINK(?Delete:3)
+    BUTTON('&Delete'),AT(301,158,49,14),USE(?Delete:3),ICON('WADELETE.ICO'),FLAT,MSG('Delete the Record'),TIP('Delete the Record'),LEFT,#SEQ(3),#ORIG(?Delete),#LINK(?Insert:3)
+  SHEET,AT(4,4,350,172),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('&1) PK_SOE_ID'),USE(?Tab:2)
+    END
+    TAB('&2) FK_SOE_TIPO'),USE(?Tab:3)
+       BUTTON('Select TIPO_DE_OBRA'),ICON('WAPARENT.ICO'),FLAT,MSG('Select Parent Field'),TIP('Select Parent Field'),LEFT,USE(?SelectTIPO_DE_OBRA),AT(8,158,118,14)
+    END
+  END
+  BUTTON('&Close'),AT(252,180,49,14),USE(?Close),ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'),TIP('Close Window'),LEFT,#SEQ(4),#ORIG(?Close)
+  BUTTON('&Help'),AT(305,180,49,14),USE(?Help),ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'),TIP('See Help Window'),LEFT,STD(STD:Help),#SEQ(5),#ORIG(?Help)
+ END
+[PROCEDURE]
+NAME ReportSOLICITUD_OBRA_ELECTRICA
+CATEGORY 'Report'
+[COMMON]
+DESCRIPTION 'Print the SOLICITUD_OBRA_ELECTRICA File'
+FROM ABC Report
+[DATA]
+[FILES]
+[PRIMARY]
+SOLICITUD_OBRA_ELECTRICA
+[INSTANCE]
+0
+[PROMPTS]
+%EnablePrintPreview LONG  (1)
+%MaximizePreviewWindow LONG  (1)
+%InitialZoom DEFAULT  ('No Zoom')
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC ReportDateStamp
+[INSTANCE]
+INSTANCE 1
+[PROMPTS]
+%TimeStampFormat DEFAULT  ('@D17')
+%UseSystemTime DEFAULT  (1)
+[ADDITION]
+NAME ABC ReportTimeStamp
+[INSTANCE]
+INSTANCE 2
+[PROMPTS]
+%DateStampFormat DEFAULT  ('@T7')
+%UseSystemDate DEFAULT  (1)
+[WINDOW]
+ProgressWindow WINDOW('Report SOLICITUD_OBRA_ELECTRICA'),|
+       AT(,,142,59),TIMER(1),GRAY,DOUBLE,FONT('Microsoft Sans Serif',8,,400,1),CENTER
+       PROGRESS,USE(Progress:Thermometer),AT(15,15,111,12),RANGE(0,100),#ORIG(Progress:Thermometer)
+       STRING(''),AT(0,3,141,10),USE(?Progress:UserString),CENTER,#ORIG(?Progress:UserString)
+       STRING(''),AT(0,30,141,10),USE(?Progress:PctText),CENTER,#ORIG(?Progress:PctText)
+       BUTTON('Cancel'),AT(46,42,49,15),USE(?Progress:Cancel),ICON('WACANCEL.ICO'),FLAT,MSG('Cancel Report'),TIP('Cancel Report'),LEFT,#ORIG(?Progress:Cancel)
+     END
+[REPORT]
+Report REPORT('SOLICITUD_OBRA_ELECTRICA Report'),AT(250,1530,7750,9658),PRE(RPT),PAPER(PAPER:A4),LANDSCAPE,FONT('Microsoft Sans Serif',8,,400,1),THOUS
+       HEADER,AT(250,250,7750,1280),USE(?Header),FONT('Microsoft Sans Serif',8,,400,1)
+         STRING('Report SOLICITUD_OBRA_ELECTRICA file'),AT(0,20,7750,220),USE(?ReportTitle),CENTER,FONT('Microsoft Sans Serif',8,,400,1)
+         BOX,AT(0,350,7750,970),COLOR(00H),USE(?HeaderBox)
+         LINE,AT(1937,350,0,970),COLOR(00H),USE(?HeaderLine:1)
+         LINE,AT(3874,350,0,970),COLOR(00H),USE(?HeaderLine:2)
+         LINE,AT(5811,350,0,970),COLOR(00H),USE(?HeaderLine:3)
+         STRING('SOE ID'),AT(50,390,1837,170),TRN,USE(?HeaderTitle:1)
+         STRING('SOE DNI'),AT(1987,390,1837,170),TRN,USE(?HeaderTitle:2)
+         STRING('SOE APELLIDO'),AT(3924,390,1837,170),TRN,USE(?HeaderTitle:3)
+         STRING('SOE NOMBRE'),AT(5861,390,1837,170),TRN,USE(?HeaderTitle:4)
+         STRING('SOE CALLE'),AT(50,570,1837,170),TRN,USE(?HeaderTitle:5)
+         STRING('SOE ALTURA'),AT(1987,570,1837,170),TRN,USE(?HeaderTitle:6)
+         STRING('SOE PISO'),AT(3924,570,1837,170),TRN,USE(?HeaderTitle:7)
+         STRING('SOE DPTO'),AT(5861,570,1837,170),TRN,USE(?HeaderTitle:8)
+         STRING('SOE TELEFONO'),AT(50,750,1837,170),TRN,USE(?HeaderTitle:9)
+         STRING('SOE EMAIL'),AT(1987,750,1837,170),TRN,USE(?HeaderTitle:10)
+         STRING('SOE TIPO'),AT(3924,750,1837,170),TRN,USE(?HeaderTitle:11)
+         STRING('SOE ESTADO'),AT(5861,750,1837,170),TRN,USE(?HeaderTitle:12)
+         STRING('SOE USUARIO'),AT(50,930,1837,170),TRN,USE(?HeaderTitle:13)
+         STRING('SOE FECHA DATE'),AT(1987,930,1837,170),TRN,USE(?HeaderTitle:14)
+         STRING('SOE FECHA TIME'),AT(3924,930,1837,170),TRN,USE(?HeaderTitle:15)
+         STRING('SOE UPDATE DATE'),AT(5861,930,1837,170),TRN,USE(?HeaderTitle:16)
+         STRING('SOE UPDATE TIME'),AT(50,1110,1837,170),TRN,USE(?HeaderTitle:17)
+         STRING('SOE NRECIBO'),AT(1987,1110,1837,170),TRN,USE(?HeaderTitle:18)
+         STRING('SOE MOTIVO'),AT(3924,1110,1837,170),TRN,USE(?HeaderTitle:19)
+       END
+Detail DETAIL,AT(0,0,7750,1250),USE(?Detail)
+         LINE,AT(0,0,0,1250),COLOR(00H),USE(?DetailLine:0)
+         LINE,AT(1937,0,0,1250),COLOR(00H),USE(?DetailLine:1)
+         LINE,AT(3874,0,0,1250),COLOR(00H),USE(?DetailLine:2)
+         LINE,AT(5811,0,0,1250),COLOR(00H),USE(?DetailLine:3)
+         LINE,AT(7750,0,0,1250),COLOR(00H),USE(?DetailLine:4)
+         STRING(@n-14),USE(SOE:SOE_ID),AT(50,50,1837,170)
+         STRING(@n-14),USE(SOE:SOE_DNI),AT(1987,50,1837,170)
+         STRING(@s30),USE(SOE:SOE_APELLIDO),AT(3924,50,1837,170)
+         STRING(@s30),USE(SOE:SOE_NOMBRE),AT(5861,50,1837,170)
+         STRING(@s20),USE(SOE:SOE_CALLE),AT(50,230,1837,170)
+         STRING(@s6),USE(SOE:SOE_ALTURA),AT(1987,230,1837,170)
+         STRING(@s3),USE(SOE:SOE_PISO),AT(3924,230,1837,170)
+         STRING(@s3),USE(SOE:SOE_DPTO),AT(5861,230,1837,170)
+         STRING(@s20),USE(SOE:SOE_TELEFONO),AT(50,410,1837,170)
+         STRING(@s50),USE(SOE:SOE_EMAIL),AT(1987,410,1837,170)
+         STRING(@s5),USE(SOE:SOE_TIPO),AT(3924,410,1837,170)
+         STRING(@s15),USE(SOE:SOE_ESTADO),AT(5861,410,1837,170)
+         STRING(@s20),USE(SOE:SOE_USUARIO),AT(50,590,1837,170)
+         STRING(@d17),USE(SOE:SOE_FECHA_DATE),AT(1987,590,1837,170)
+         STRING(@t7),USE(SOE:SOE_FECHA_TIME),AT(3924,590,1837,170)
+         STRING(@d17),USE(SOE:SOE_UPDATE_DATE),AT(5861,590,1837,170)
+         STRING(@t7),USE(SOE:SOE_UPDATE_TIME),AT(50,770,1837,170)
+         STRING(@s15),USE(SOE:SOE_NRECIBO),AT(1987,770,1837,170)
+         STRING(@s130),USE(SOE:SOE_MOTIVO),AT(3924,770,1837,170)
+         LINE,AT(0,1250,7750,0),COLOR(00H),USE(?DetailEndLine)
+       END
+       FOOTER,AT(250,11188,7750,250),USE(?Footer)
+         STRING('Date:'),AT(115,52,344,135),USE(?ReportDatePrompt:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(1),#ORIG(?ReportDatePrompt)
+         STRING('<<-- Date Stamp -->'),AT(490,52,927,135),USE(?ReportDateStamp:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(1),#ORIG(?ReportDateStamp)
+         STRING('Time:'),AT(1625,52,271,135),USE(?ReportTimePrompt:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(2),#ORIG(?ReportTimePrompt)
+         STRING('<<-- Time Stamp -->'),AT(1927,52,927,135),USE(?ReportTimeStamp:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(2),#ORIG(?ReportTimeStamp)
+         STRING(@pPage <<#p),AT(6950,52,700,135),FONT('Arial',8,,FONT:regular),PAGENO,USE(?PageCount:2)
+       END
+       FORM,AT(250,250,7750,11188),USE(?Form),FONT('Microsoft Sans Serif',8,,400,1)
+         IMAGE(''),AT(0,0,7750,11188),USE(?FormImage),TILED
+       END
+     END
+[PROCEDURE]
+NAME BrowseTIPO_DE_OBRA
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'TIPO_DE_OBRA'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+TIPO_DE_OBRA
+[INSTANCE]
+1
+[KEY]
+TDO:PK_TDO_TIPO
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (1)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  ()
+%SortCondition DEPEND %SortOrder @S255 TIMES 0
+%SortKey DEPEND %SortOrder KEY TIMES 0
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 0
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 0
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 0
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 0
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 0 !HOLA 0
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 0
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 0
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 0
+%SortRangeFile DEPEND %SortOrder FILE TIMES 0
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 0
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 0
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 0
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 0
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 0
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseViewButton
+[INSTANCE]
+INSTANCE 2
+PARENT 1
+[ADDITION]
+NAME ABC BrowseUpdateButtons
+[INSTANCE]
+INSTANCE 3
+PARENT 1
+PROCPROP
+[PROMPTS]
+%UpdateProcedure PROCEDURE  (UpdateTIPO_DE_OBRA)
+%EditViaPopup LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC HelpButton
+[INSTANCE]
+INSTANCE 5
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 6
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('TIPO_DE_OBRA'),AT(,,224,198),IMM,RESIZE,GRAY,MDI,HLP('BrowseTIPO_DE_OBRA'),FONT('Microsoft Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,30,208,124),USE(?Browse:1),MSG('TIPO_DE_OBRA'),IMM,HVSCROLL,|
+      FORMAT('36L(2)|M~TDO TIPO~L(2)@s5@80L(2)|M~TDO DESCRIPCION~L(2)@s50@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(TDO:TDO_TIPO,TDO:TDO_DESCRIPCION)
+    BUTTON('&View'),AT(8,158,49,14),USE(?View:2),ICON('WAVIEW.ICO'),FLAT,MSG('View Record'),TIP('View Record'),LEFT,#SEQ(2),#ORIG(?View)
+    BUTTON('&Insert'),AT(61,158,49,14),USE(?Insert:3),ICON('WAINSERT.ICO'),FLAT,MSG('Insert a Record'),TIP('Insert a Record'),LEFT,#SEQ(3),#ORIG(?Insert),#LINK(?Change:3)
+    BUTTON('&Change'),AT(114,158,49,14),USE(?Change:3),ICON('WACHANGE.ICO'),FLAT,MSG('Change the Record'),TIP('Change the Record'),LEFT,DEFAULT,#SEQ(3),#ORIG(?Change),#LINK(?Delete:3)
+    BUTTON('&Delete'),AT(167,158,49,14),USE(?Delete:3),ICON('WADELETE.ICO'),FLAT,MSG('Delete the Record'),TIP('Delete the Record'),LEFT,#SEQ(3),#ORIG(?Delete),#LINK(?Insert:3)
+  SHEET,AT(4,4,216,172),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('&1) PK_TDO_TIPO'),USE(?Tab:2)
+    END
+  END
+  BUTTON('&Close'),AT(118,180,49,14),USE(?Close),ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'),TIP('Close Window'),LEFT,#SEQ(4),#ORIG(?Close)
+  BUTTON('&Help'),AT(171,180,49,14),USE(?Help),ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'),TIP('See Help Window'),LEFT,STD(STD:Help),#SEQ(5),#ORIG(?Help)
+ END
+[PROCEDURE]
+NAME ReportTIPO_DE_OBRA
+CATEGORY 'Report'
+[COMMON]
+DESCRIPTION 'Print the TIPO_DE_OBRA File'
+FROM ABC Report
+[DATA]
+[FILES]
+[PRIMARY]
+TIPO_DE_OBRA
+[INSTANCE]
+0
+[PROMPTS]
+%EnablePrintPreview LONG  (1)
+%MaximizePreviewWindow LONG  (1)
+%InitialZoom DEFAULT  ('No Zoom')
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC ReportDateStamp
+[INSTANCE]
+INSTANCE 1
+[PROMPTS]
+%TimeStampFormat DEFAULT  ('@D17')
+%UseSystemTime DEFAULT  (1)
+[ADDITION]
+NAME ABC ReportTimeStamp
+[INSTANCE]
+INSTANCE 2
+[PROMPTS]
+%DateStampFormat DEFAULT  ('@T7')
+%UseSystemDate DEFAULT  (1)
+[WINDOW]
+ProgressWindow WINDOW('Report TIPO_DE_OBRA'),|
+       AT(,,142,59),TIMER(1),GRAY,DOUBLE,FONT('Microsoft Sans Serif',8,,400,1),CENTER
+       PROGRESS,USE(Progress:Thermometer),AT(15,15,111,12),RANGE(0,100),#ORIG(Progress:Thermometer)
+       STRING(''),AT(0,3,141,10),USE(?Progress:UserString),CENTER,#ORIG(?Progress:UserString)
+       STRING(''),AT(0,30,141,10),USE(?Progress:PctText),CENTER,#ORIG(?Progress:PctText)
+       BUTTON('Cancel'),AT(46,42,49,15),USE(?Progress:Cancel),ICON('WACANCEL.ICO'),FLAT,MSG('Cancel Report'),TIP('Cancel Report'),LEFT,#ORIG(?Progress:Cancel)
+     END
+[REPORT]
+Report REPORT('TIPO_DE_OBRA Report'),AT(250,850,7750,10338),PRE(RPT),PAPER(PAPER:A4),LANDSCAPE,FONT('Microsoft Sans Serif',8,,400,1),THOUS
+       HEADER,AT(250,250,7750,600),USE(?Header),FONT('Microsoft Sans Serif',8,,400,1)
+         STRING('Report TIPO_DE_OBRA file'),AT(0,20,7750,220),USE(?ReportTitle),CENTER,FONT('Microsoft Sans Serif',8,,400,1)
+         BOX,AT(0,350,7750,250),COLOR(00H),USE(?HeaderBox)
+         LINE,AT(3875,350,0,250),COLOR(00H),USE(?HeaderLine:1)
+         STRING('TDO TIPO'),AT(50,390,3775,170),TRN,USE(?HeaderTitle:1)
+         STRING('TDO DESCRIPCION'),AT(3925,390,3775,170),TRN,USE(?HeaderTitle:2)
+       END
+Detail DETAIL,AT(0,0,7750,250),USE(?Detail)
+         LINE,AT(0,0,0,250),COLOR(00H),USE(?DetailLine:0)
+         LINE,AT(3875,0,0,250),COLOR(00H),USE(?DetailLine:1)
+         LINE,AT(7750,0,0,250),COLOR(00H),USE(?DetailLine:2)
+         STRING(@s5),USE(TDO:TDO_TIPO),AT(50,50,3775,170)
+         STRING(@s50),USE(TDO:TDO_DESCRIPCION),AT(3925,50,3775,170)
+         LINE,AT(0,250,7750,0),COLOR(00H),USE(?DetailEndLine)
+       END
+       FOOTER,AT(250,11188,7750,250),USE(?Footer)
+         STRING('Date:'),AT(115,52,344,135),USE(?ReportDatePrompt:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(1),#ORIG(?ReportDatePrompt)
+         STRING('<<-- Date Stamp -->'),AT(490,52,927,135),USE(?ReportDateStamp:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(1),#ORIG(?ReportDateStamp)
+         STRING('Time:'),AT(1625,52,271,135),USE(?ReportTimePrompt:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(2),#ORIG(?ReportTimePrompt)
+         STRING('<<-- Time Stamp -->'),AT(1927,52,927,135),USE(?ReportTimeStamp:2),TRN,FONT('Arial',8,,FONT:regular),#SEQ(2),#ORIG(?ReportTimeStamp)
+         STRING(@pPage <<#p),AT(6950,52,700,135),FONT('Arial',8,,FONT:regular),PAGENO,USE(?PageCount:2)
+       END
+       FORM,AT(250,250,7750,11188),USE(?Form),FONT('Microsoft Sans Serif',8,,400,1)
+         IMAGE(''),AT(0,0,7750,11188),USE(?FormImage),TILED
+       END
+     END
+[PROCEDURE]
+NAME SelectSOLICITUD_OBRA_ELECTRICA
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'Select a SOLICITUD_OBRA_ELECTRICA Record'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+SOLICITUD_OBRA_ELECTRICA
+[INSTANCE]
+1
+[KEY]
+SOE:PK_SOE_ID
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (1)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  (1)
+%SortCondition DEPEND %SortOrder @S255 TIMES 1
+WHEN  (1) ('CHOICE(?CurrentTab) = 2')
+%SortKey DEPEND %SortOrder KEY TIMES 1
+WHEN  (1) (SOE:FK_SOE_TIPO)
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('Step')
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 1
+WHEN  (1) ('')
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 0 !HOLA 0
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 1
+WHEN  (1) ()
+%SortRangeFile DEPEND %SortOrder FILE TIMES 1
+WHEN  (1) ()
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('')
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 1
+WHEN  (1) ('Fixed Thumb')
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 1
+WHEN  (1) ('Runtime')
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 1
+WHEN  (1)TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (1)
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (0)
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 1
+WHEN  (1) (0)
+[ADDITION]
+NAME ABC BrowseSelectButton
+[INSTANCE]
+INSTANCE 2
+PARENT 1
+[PROMPTS]
+%HideIfDisabled LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC HelpButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Select a SOLICITUD_OBRA_ELECTRICA Record'),AT(,,358,198),IMM,RESIZE,GRAY,MDI,HLP('SelectSOLICITUD_OBRA_ELECTRICA'),FONT('Microsoft Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,30,342,124),USE(?Browse:1),MSG('SOLICITUD_OBRA_ELECTRICA'),IMM,HVSCROLL,|
+      FORMAT('64R(2)|M~SOE ID~C(0)@n-14@64R(2)|M~SOE DNI~C(0)@n-14@80L(2)|M~SOE APELLIDO~L(2)@s30@80L(2)|M~SOE NOMBRE~L(2)@s30@80L(2)|M~SOE CALLE~L(2)@s20@44L(2)|M~SOE ALTURA~L(2)@s6@36L(2)|M~SOE PISO~L(2)@s3@36L(2)|M~SOE DPTO~L(2)@s3@80L(2)|M~SOE TELEFONO~L(2)@s20@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(SOE:SOE_ID,SOE:SOE_DNI,SOE:SOE_APELLIDO,SOE:SOE_NOMBRE,SOE:SOE_CALLE,SOE:SOE_ALTURA,SOE:SOE_PISO,SOE:SOE_DPTO,SOE:SOE_TELEFONO)
+    BUTTON('&Select'),AT(301,158,49,14),USE(?Select:2),ICON('WASELECT.ICO'),FLAT,MSG('Select the Record'),TIP('Select the Record'),LEFT,#SEQ(2),#ORIG(?Select)
+  SHEET,AT(4,4,350,172),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('&1) PK_SOE_ID'),USE(?Tab:2)
+    END
+    TAB('&2) FK_SOE_TIPO'),USE(?Tab:3)
+    END
+  END
+  BUTTON('&Close'),AT(252,180,49,14),USE(?Close),ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'),TIP('Close Window'),LEFT,#SEQ(3),#ORIG(?Close)
+  BUTTON('&Help'),AT(305,180,49,14),USE(?Help),ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'),TIP('See Help Window'),LEFT,STD(STD:Help),#SEQ(4),#ORIG(?Help)
+ END
+[PROCEDURE]
+NAME UpdatePRESUPUESTO_OBRA_ELECTRICA
+CATEGORY 'Form'
+[COMMON]
+DESCRIPTION 'Form PRESUPUESTO_OBRA_ELECTRICA'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+PRESUPUESTO_OBRA_ELECTRICA
+[INSTANCE]
+2
+[OTHERS]
+SOLICITUD_OBRA_ELECTRICA
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 1
+WHEN  ('?POE:POE_SOE_ID') ()
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 1
+WHEN  ('?POE:POE_SOE_ID') ()
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?POE:POE_SOE_ID') ()
+
+%PostLookupKey DEPEND %Control KEY TIMES 1
+WHEN  ('?POE:POE_SOE_ID') (SOE:PK_SOE_ID)
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 1
+WHEN  ('?POE:POE_SOE_ID') (SOE:SOE_ID)
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?POE:POE_SOE_ID') (SelectSOLICITUD_OBRA_ELECTRICA)
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 1
+WHEN  ('?POE:POE_SOE_ID') ()
+[ADDITION]
+NAME ABC RecordValidation
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%ValidateOnAccept LONG  (1)
+%ValidateOnNonStopSelect LONG  (1)
+%ControlsExcluded MULTI LONG  ()
+%ControlToExclude DEPEND %ControlsExcluded STRING TIMES 0
+[ADDITION]
+NAME ABC SaveButton
+[INSTANCE]
+INSTANCE 2
+PROCPROP
+[PROMPTS]
+%InsertAllowed LONG  (1)
+%InsertMessage @S40  ('Se agregará nueva Alarma')
+%ChangeAllowed LONG  (1)
+%ChangeMessage @S40  ('La Alarma será modificado')
+%DeleteAllowed LONG  (1)
+%DeleteMessage @S40  ('La Alarma será eliminado')
+%ViewMessage @S40  ('Alarma')
+%MessageHeader LONG  (0)
+%ActionOnDelete STRING  ('Standard Warning')
+%PrimingFields MULTI LONG  ()
+%PrimedField DEPEND %PrimingFields FIELD TIMES 0
+
+%PrimedValue DEPEND %PrimingFields @S255 TIMES 0
+
+%ActionOnCancel STRING  ('Confirm cancel')
+%MessageLocation STRING  ('Status Bar')
+%MessageStatusSection @n1  (2)
+
+%HistoryKey        DEFAULT (CtrlH)
+
+%AppendToTitle LONG  ()
+%AppendToTitleID @S255  ('')
+[ADDITION]
+NAME ABC CancelButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC HelpButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC FormVCRControls
+[INSTANCE]
+INSTANCE 5
+PARENT 2
+[ADDITION]
+NAME ABC ViewFormActions
+[INSTANCE]
+INSTANCE 6
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 7
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Form PRESUPUESTO_OBRA_ELECTRICA'),AT(,,188,168),RESIZE,IMM,GRAY,MDI,HLP('UpdatePRESUPUESTO_OBRA_ELECTRICA'),FONT('Microsoft Sans Serif',8,,400,1),CENTER,SYSTEM
+  SHEET,AT(4,4,180,142),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('&1) General'),USE(?Tab:1)
+         PROMPT('POE ID:'),USE(?POE:POE_ID:Prompt),TRN,AT(8,20),#ORIG(?POE:POE_ID:Prompt),#LINK(POE:POE_ID)
+         ENTRY(@n-14),USE(POE:POE_ID),AT(76,20,64,10),#ORIG(POE:POE_ID),#LINK(?POE:POE_ID:Prompt)
+         PROMPT('POE SOE ID:'),USE(?POE:POE_SOE_ID:Prompt),TRN,AT(8,34),#ORIG(?POE:POE_SOE_ID:Prompt),#LINK(POE:POE_SOE_ID)
+         ENTRY(@n-14),USE(POE:POE_SOE_ID),AT(76,34,64,10),#ORIG(POE:POE_SOE_ID),#LINK(?POE:POE_SOE_ID:Prompt)
+         PROMPT('POE ESTADO:'),USE(?POE:POE_ESTADO:Prompt),TRN,AT(8,48),#ORIG(?POE:POE_ESTADO:Prompt),#LINK(POE:POE_ESTADO)
+         ENTRY(@s15),USE(POE:POE_ESTADO),AT(76,48,64,10),#ORIG(POE:POE_ESTADO),#LINK(?POE:POE_ESTADO:Prompt)
+         PROMPT('POE NRO OBRA:'),USE(?POE:POE_NRO_OBRA:Prompt),TRN,AT(8,62),#ORIG(?POE:POE_NRO_OBRA:Prompt),#LINK(POE:POE_NRO_OBRA)
+         ENTRY(@n-14),USE(POE:POE_NRO_OBRA),AT(76,62,64,10),#ORIG(POE:POE_NRO_OBRA),#LINK(?POE:POE_NRO_OBRA:Prompt)
+         PROMPT('POE USUARIO:'),USE(?POE:POE_USUARIO:Prompt),TRN,AT(8,76),#ORIG(?POE:POE_USUARIO:Prompt),#LINK(POE:POE_USUARIO)
+         ENTRY(@s20),USE(POE:POE_USUARIO),AT(76,76,84,10),#ORIG(POE:POE_USUARIO),#LINK(?POE:POE_USUARIO:Prompt)
+         PROMPT('POE FECHA DATE:'),USE(?POE:POE_FECHA_DATE:Prompt),TRN,AT(8,90),#ORIG(?POE:POE_FECHA_DATE:Prompt),#LINK(POE:POE_FECHA_DATE)
+         ENTRY(@d17),USE(POE:POE_FECHA_DATE),AT(76,90,104,10),#ORIG(POE:POE_FECHA_DATE),#LINK(?POE:POE_FECHA_DATE:Prompt)
+         PROMPT('POE FECHA TIME:'),USE(?POE:POE_FECHA_TIME:Prompt),TRN,AT(8,104),#ORIG(?POE:POE_FECHA_TIME:Prompt),#LINK(POE:POE_FECHA_TIME)
+         ENTRY(@t7),USE(POE:POE_FECHA_TIME),AT(76,104,104,10),#ORIG(POE:POE_FECHA_TIME),#LINK(?POE:POE_FECHA_TIME:Prompt)
+         PROMPT('POE UPDATE DATE:'),USE(?POE:POE_UPDATE_DATE:Prompt),TRN,AT(8,118),#ORIG(?POE:POE_UPDATE_DATE:Prompt),#LINK(POE:POE_UPDATE_DATE)
+         ENTRY(@d17),USE(POE:POE_UPDATE_DATE),AT(76,118,104,10),#ORIG(POE:POE_UPDATE_DATE),#LINK(?POE:POE_UPDATE_DATE:Prompt)
+         PROMPT('POE UPDATE TIME:'),USE(?POE:POE_UPDATE_TIME:Prompt),TRN,AT(8,132),#ORIG(?POE:POE_UPDATE_TIME:Prompt),#LINK(POE:POE_UPDATE_TIME)
+         ENTRY(@t7),USE(POE:POE_UPDATE_TIME),AT(76,132,104,10),#ORIG(POE:POE_UPDATE_TIME),#LINK(?POE:POE_UPDATE_TIME:Prompt)
+    END
+  END
+  BUTTON('&OK'),AT(29,150,49,14),USE(?OK),ICON('WAOK.ICO'),FLAT,MSG('Accept data and close the window'),TIP('Accept data and close the window'),LEFT,DEFAULT,#SEQ(2),#ORIG(?OK)
+  BUTTON('&Cancel'),AT(82,150,49,14),USE(?Cancel),ICON('WACANCEL.ICO'),FLAT,MSG('Cancel operation'),TIP('Cancel operation'),LEFT,#SEQ(3),#ORIG(?Cancel)
+  BUTTON('&Help'),AT(135,150,49,14),USE(?Help),ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'),TIP('See Help Window'),LEFT,STD(STD:Help),#SEQ(4),#ORIG(?Help)
+ END
+[PROCEDURE]
+NAME SelectTIPO_DE_OBRA
+CATEGORY 'Browse'
+[COMMON]
+DESCRIPTION 'Select a TIPO_DE_OBRA Record'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+TIPO_DE_OBRA
+[INSTANCE]
+1
+[KEY]
+TDO:PK_TDO_TIPO
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseBox
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%AcceptToolbarControl LONG (1)
+%EnableQuickScan LONG  (0)
+
+%LocatorType DEFAULT  ('Step')
+%OverrideDefaultLocator DEFAULT ('')
+%OverrideLocator DEFAULT ('')
+
+%RecordFilter @S255  ('')
+
+%RangeField COMPONENT  ()
+
+%RangeLimitType DEFAULT  ('')
+%RangeLimit FIELD  ()
+%RangeLow FIELD  ()
+%RangeHigh FIELD  ()
+%RangeFile FILE  ()
+%ScrollBehavior DEFAULT  ('Fixed Thumb')
+%SortOrder MULTI LONG  ()
+%SortCondition DEPEND %SortOrder @S255 TIMES 0
+%SortKey DEPEND %SortOrder KEY TIMES 0
+%SortLocatorType DEPEND %SortOrder DEFAULT TIMES 0
+%SortOverrideDefaultLocator DEPEND %SortOrder DEFAULT TIMES 0
+%SortOverrideLocator DEPEND %SortOrder DEFAULT TIMES 0
+%SortRecordFilter DEPEND %SortOrder @S255 TIMES 0
+%SortRangeField DEPEND %SortOrder COMPONENT TIMES 0 !HOLA 0
+%SortRangeLimit DEPEND %SortOrder FIELD TIMES 0
+%SortRangeLow DEPEND %SortOrder FIELD TIMES 0
+%SortRangeHigh DEPEND %SortOrder FIELD TIMES 0
+%SortRangeFile DEPEND %SortOrder FILE TIMES 0
+%SortRangeLimitType DEPEND %SortOrder DEFAULT TIMES 0
+%SortScrollBehavior DEPEND %SortOrder DEFAULT TIMES 0
+%SortScrollKeyDistribution DEPEND %SortOrder STRING TIMES 0
+%SortCustomKeyDistribution DEPEND %SortOrder MULTI LONG TIMES 0
+%SortKeyDistributionValue DEPEND %SortCustomKeyDistribution @S10 TIMES 0
+%SortScrollAlpha DEPEND %SortOrder LONG TIMES 0
+%SortScrollNumeric DEPEND %SortOrder LONG TIMES 0
+%SortScrollAlt DEPEND %SortOrder LONG TIMES 0
+[ADDITION]
+NAME ABC BrowseSelectButton
+[INSTANCE]
+INSTANCE 2
+PARENT 1
+[PROMPTS]
+%HideIfDisabled LONG  (1)
+[ADDITION]
+NAME ABC CloseButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC HelpButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 5
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Select a TIPO_DE_OBRA Record'),AT(,,158,198),IMM,RESIZE,GRAY,MDI,HLP('SelectTIPO_DE_OBRA'),FONT('Microsoft Sans Serif',8,,400,1),CENTER,SYSTEM
+    LIST,AT(8,30,142,124),USE(?Browse:1),MSG('TIPO_DE_OBRA'),IMM,HVSCROLL,|
+      FORMAT('36L(2)|M~TDO TIPO~L(2)@s5@80L(2)|M~TDO DESCRIPCION~L(2)@s50@'),|
+      FROM(Queue:Browse:1),#SEQ(1),#ORIG(?List),#FIELDS(TDO:TDO_TIPO,TDO:TDO_DESCRIPCION)
+    BUTTON('&Select'),AT(101,158,49,14),USE(?Select:2),ICON('WASELECT.ICO'),FLAT,MSG('Select the Record'),TIP('Select the Record'),LEFT,#SEQ(2),#ORIG(?Select)
+  SHEET,AT(4,4,150,172),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('&1) PK_TDO_TIPO'),USE(?Tab:2)
+    END
+  END
+  BUTTON('&Close'),AT(52,180,49,14),USE(?Close),ICON('WACLOSE.ICO'),FLAT,MSG('Close Window'),TIP('Close Window'),LEFT,#SEQ(3),#ORIG(?Close)
+  BUTTON('&Help'),AT(105,180,49,14),USE(?Help),ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'),TIP('See Help Window'),LEFT,STD(STD:Help),#SEQ(4),#ORIG(?Help)
+ END
+[PROCEDURE]
+NAME UpdateSOLICITUD_OBRA_ELECTRICA
+CATEGORY 'Form'
+[COMMON]
+DESCRIPTION 'Form SOLICITUD_OBRA_ELECTRICA'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+SOLICITUD_OBRA_ELECTRICA
+[INSTANCE]
+2
+[OTHERS]
+TIPO_DE_OBRA
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 1
+WHEN  ('?SOE:SOE_TIPO') ()
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 1
+WHEN  ('?SOE:SOE_TIPO') ()
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?SOE:SOE_TIPO') ()
+
+%PostLookupKey DEPEND %Control KEY TIMES 1
+WHEN  ('?SOE:SOE_TIPO') (TDO:PK_TDO_TIPO)
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 1
+WHEN  ('?SOE:SOE_TIPO') (TDO:TDO_TIPO)
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 1
+WHEN  ('?SOE:SOE_TIPO') (SelectTIPO_DE_OBRA)
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 1
+WHEN  ('?SOE:SOE_TIPO') ()
+[ADDITION]
+NAME ABC RecordValidation
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%ValidateOnAccept LONG  (1)
+%ValidateOnNonStopSelect LONG  (1)
+%ControlsExcluded MULTI LONG  ()
+%ControlToExclude DEPEND %ControlsExcluded STRING TIMES 0
+[ADDITION]
+NAME ABC SaveButton
+[INSTANCE]
+INSTANCE 2
+PROCPROP
+[PROMPTS]
+%InsertAllowed LONG  (1)
+%InsertMessage @S40  ('Se agregará nueva Alarma')
+%ChangeAllowed LONG  (1)
+%ChangeMessage @S40  ('La Alarma será modificado')
+%DeleteAllowed LONG  (1)
+%DeleteMessage @S40  ('La Alarma será eliminado')
+%ViewMessage @S40  ('Alarma')
+%MessageHeader LONG  (0)
+%ActionOnDelete STRING  ('Standard Warning')
+%PrimingFields MULTI LONG  ()
+%PrimedField DEPEND %PrimingFields FIELD TIMES 0
+
+%PrimedValue DEPEND %PrimingFields @S255 TIMES 0
+
+%ActionOnCancel STRING  ('Confirm cancel')
+%MessageLocation STRING  ('Status Bar')
+%MessageStatusSection @n1  (2)
+
+%HistoryKey        DEFAULT (CtrlH)
+
+%AppendToTitle LONG  ()
+%AppendToTitleID @S255  ('')
+[ADDITION]
+NAME ABC CancelButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC HelpButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC FormVCRControls
+[INSTANCE]
+INSTANCE 5
+PARENT 2
+[ADDITION]
+NAME ABC ViewFormActions
+[INSTANCE]
+INSTANCE 6
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 7
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Form SOLICITUD_OBRA_ELECTRICA'),AT(,,358,182),RESIZE,IMM,GRAY,MDI,HLP('UpdateSOLICITUD_OBRA_ELECTRICA'),FONT('Microsoft Sans Serif',8,,400,1),CENTER,SYSTEM
+  SHEET,AT(4,4,350,156),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('&1) General'),USE(?Tab:1)
+         PROMPT('SOE ID:'),USE(?SOE:SOE_ID:Prompt),TRN,AT(8,20),#ORIG(?SOE:SOE_ID:Prompt),#LINK(SOE:SOE_ID)
+         ENTRY(@n-14),USE(SOE:SOE_ID),AT(76,20,64,10),#ORIG(SOE:SOE_ID),#LINK(?SOE:SOE_ID:Prompt)
+         PROMPT('SOE DNI:'),USE(?SOE:SOE_DNI:Prompt),TRN,AT(8,34),#ORIG(?SOE:SOE_DNI:Prompt),#LINK(SOE:SOE_DNI)
+         ENTRY(@n-14),USE(SOE:SOE_DNI),AT(76,34,64,10),#ORIG(SOE:SOE_DNI),#LINK(?SOE:SOE_DNI:Prompt)
+         PROMPT('SOE APELLIDO:'),USE(?SOE:SOE_APELLIDO:Prompt),TRN,AT(8,48),#ORIG(?SOE:SOE_APELLIDO:Prompt),#LINK(SOE:SOE_APELLIDO)
+         ENTRY(@s30),USE(SOE:SOE_APELLIDO),AT(76,48,124,10),#ORIG(SOE:SOE_APELLIDO),#LINK(?SOE:SOE_APELLIDO:Prompt)
+         PROMPT('SOE NOMBRE:'),USE(?SOE:SOE_NOMBRE:Prompt),TRN,AT(8,62),#ORIG(?SOE:SOE_NOMBRE:Prompt),#LINK(SOE:SOE_NOMBRE)
+         ENTRY(@s30),USE(SOE:SOE_NOMBRE),AT(76,62,124,10),#ORIG(SOE:SOE_NOMBRE),#LINK(?SOE:SOE_NOMBRE:Prompt)
+         PROMPT('SOE CALLE:'),USE(?SOE:SOE_CALLE:Prompt),TRN,AT(8,76),#ORIG(?SOE:SOE_CALLE:Prompt),#LINK(SOE:SOE_CALLE)
+         ENTRY(@s20),USE(SOE:SOE_CALLE),AT(76,76,84,10),#ORIG(SOE:SOE_CALLE),#LINK(?SOE:SOE_CALLE:Prompt)
+         PROMPT('SOE ALTURA:'),USE(?SOE:SOE_ALTURA:Prompt),TRN,AT(8,90),#ORIG(?SOE:SOE_ALTURA:Prompt),#LINK(SOE:SOE_ALTURA)
+         ENTRY(@s6),USE(SOE:SOE_ALTURA),AT(76,90,40,10),#ORIG(SOE:SOE_ALTURA),#LINK(?SOE:SOE_ALTURA:Prompt)
+         PROMPT('SOE PISO:'),USE(?SOE:SOE_PISO:Prompt),TRN,AT(8,104),#ORIG(?SOE:SOE_PISO:Prompt),#LINK(SOE:SOE_PISO)
+         ENTRY(@s3),USE(SOE:SOE_PISO),AT(76,104,40,10),#ORIG(SOE:SOE_PISO),#LINK(?SOE:SOE_PISO:Prompt)
+         PROMPT('SOE DPTO:'),USE(?SOE:SOE_DPTO:Prompt),TRN,AT(8,118),#ORIG(?SOE:SOE_DPTO:Prompt),#LINK(SOE:SOE_DPTO)
+         ENTRY(@s3),USE(SOE:SOE_DPTO),AT(76,118,40,10),#ORIG(SOE:SOE_DPTO),#LINK(?SOE:SOE_DPTO:Prompt)
+         PROMPT('SOE TELEFONO:'),USE(?SOE:SOE_TELEFONO:Prompt),TRN,AT(8,132),#ORIG(?SOE:SOE_TELEFONO:Prompt),#LINK(SOE:SOE_TELEFONO)
+         ENTRY(@s20),USE(SOE:SOE_TELEFONO),AT(76,132,84,10),#ORIG(SOE:SOE_TELEFONO),#LINK(?SOE:SOE_TELEFONO:Prompt)
+         PROMPT('SOE EMAIL:'),USE(?SOE:SOE_EMAIL:Prompt),TRN,AT(8,146),#ORIG(?SOE:SOE_EMAIL:Prompt),#LINK(SOE:SOE_EMAIL)
+         ENTRY(@s50),USE(SOE:SOE_EMAIL),AT(76,146,204,10),#ORIG(SOE:SOE_EMAIL),#LINK(?SOE:SOE_EMAIL:Prompt)
+    END
+    TAB('&2) General (cont.)'),USE(?Tab:2)
+         PROMPT('SOE TIPO:'),USE(?SOE:SOE_TIPO:Prompt),TRN,AT(8,20),#ORIG(?SOE:SOE_TIPO:Prompt),#LINK(SOE:SOE_TIPO)
+         ENTRY(@s5),USE(SOE:SOE_TIPO),AT(76,20,40,10),#ORIG(SOE:SOE_TIPO),#LINK(?SOE:SOE_TIPO:Prompt)
+         PROMPT('SOE ESTADO:'),USE(?SOE:SOE_ESTADO:Prompt),TRN,AT(8,34),#ORIG(?SOE:SOE_ESTADO:Prompt),#LINK(SOE:SOE_ESTADO)
+         ENTRY(@s15),USE(SOE:SOE_ESTADO),AT(76,34,64,10),#ORIG(SOE:SOE_ESTADO),#LINK(?SOE:SOE_ESTADO:Prompt)
+         PROMPT('SOE USUARIO:'),USE(?SOE:SOE_USUARIO:Prompt),TRN,AT(8,48),#ORIG(?SOE:SOE_USUARIO:Prompt),#LINK(SOE:SOE_USUARIO)
+         ENTRY(@s20),USE(SOE:SOE_USUARIO),AT(76,48,84,10),#ORIG(SOE:SOE_USUARIO),#LINK(?SOE:SOE_USUARIO:Prompt)
+         PROMPT('SOE FECHA DATE:'),USE(?SOE:SOE_FECHA_DATE:Prompt),TRN,AT(8,62),#ORIG(?SOE:SOE_FECHA_DATE:Prompt),#LINK(SOE:SOE_FECHA_DATE)
+         ENTRY(@d17),USE(SOE:SOE_FECHA_DATE),AT(76,62,104,10),#ORIG(SOE:SOE_FECHA_DATE),#LINK(?SOE:SOE_FECHA_DATE:Prompt)
+         PROMPT('SOE FECHA TIME:'),USE(?SOE:SOE_FECHA_TIME:Prompt),TRN,AT(8,76),#ORIG(?SOE:SOE_FECHA_TIME:Prompt),#LINK(SOE:SOE_FECHA_TIME)
+         ENTRY(@t7),USE(SOE:SOE_FECHA_TIME),AT(76,76,104,10),#ORIG(SOE:SOE_FECHA_TIME),#LINK(?SOE:SOE_FECHA_TIME:Prompt)
+         PROMPT('SOE UPDATE DATE:'),USE(?SOE:SOE_UPDATE_DATE:Prompt),TRN,AT(8,90),#ORIG(?SOE:SOE_UPDATE_DATE:Prompt),#LINK(SOE:SOE_UPDATE_DATE)
+         ENTRY(@d17),USE(SOE:SOE_UPDATE_DATE),AT(76,90,104,10),#ORIG(SOE:SOE_UPDATE_DATE),#LINK(?SOE:SOE_UPDATE_DATE:Prompt)
+         PROMPT('SOE UPDATE TIME:'),USE(?SOE:SOE_UPDATE_TIME:Prompt),TRN,AT(8,104),#ORIG(?SOE:SOE_UPDATE_TIME:Prompt),#LINK(SOE:SOE_UPDATE_TIME)
+         ENTRY(@t7),USE(SOE:SOE_UPDATE_TIME),AT(76,104,104,10),#ORIG(SOE:SOE_UPDATE_TIME),#LINK(?SOE:SOE_UPDATE_TIME:Prompt)
+         PROMPT('SOE NRECIBO:'),USE(?SOE:SOE_NRECIBO:Prompt),TRN,AT(8,118),#ORIG(?SOE:SOE_NRECIBO:Prompt),#LINK(SOE:SOE_NRECIBO)
+         ENTRY(@s15),USE(SOE:SOE_NRECIBO),AT(76,118,64,10),#ORIG(SOE:SOE_NRECIBO),#LINK(?SOE:SOE_NRECIBO:Prompt)
+         PROMPT('SOE MOTIVO:'),USE(?SOE:SOE_MOTIVO:Prompt),TRN,AT(8,132),#ORIG(?SOE:SOE_MOTIVO:Prompt),#LINK(SOE:SOE_MOTIVO)
+         ENTRY(@s130),USE(SOE:SOE_MOTIVO),AT(76,132,274,10),#ORIG(SOE:SOE_MOTIVO),#LINK(?SOE:SOE_MOTIVO:Prompt)
+    END
+  END
+  BUTTON('&OK'),AT(199,164,49,14),USE(?OK),ICON('WAOK.ICO'),FLAT,MSG('Accept data and close the window'),TIP('Accept data and close the window'),LEFT,DEFAULT,#SEQ(2),#ORIG(?OK)
+  BUTTON('&Cancel'),AT(252,164,49,14),USE(?Cancel),ICON('WACANCEL.ICO'),FLAT,MSG('Cancel operation'),TIP('Cancel operation'),LEFT,#SEQ(3),#ORIG(?Cancel)
+  BUTTON('&Help'),AT(305,164,49,14),USE(?Help),ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'),TIP('See Help Window'),LEFT,STD(STD:Help),#SEQ(4),#ORIG(?Help)
+ END
+[PROCEDURE]
+NAME UpdateTIPO_DE_OBRA
+CATEGORY 'Form'
+[COMMON]
+DESCRIPTION 'Form TIPO_DE_OBRA'
+FROM ABC Window
+[DATA]
+CurrentTab                STRING(80)
+[FILES]
+[PRIMARY]
+TIPO_DE_OBRA
+[INSTANCE]
+2
+[PROMPTS]
+%ButtonAction DEPEND %Control STRING TIMES 0
+
+%ButtonRunName DEPEND %Control STRING TIMES 0
+
+%ButtonRunParameters DEPEND %Control STRING TIMES 0
+
+%ButtonProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ButtonThread DEPEND %Control LONG TIMES 0
+
+%ButtonThreadStack DEPEND %Control @n7 TIMES 0
+
+%ButtonParameters DEPEND %Control STRING TIMES 0
+
+%ButtonRequest DEPEND %Control STRING TIMES 0
+
+%PreLookupKey DEPEND %Control KEY TIMES 0
+
+%PreLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PreLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%PostLookupKey DEPEND %Control KEY TIMES 0
+
+%PostLookupField DEPEND %Control COMPONENT TIMES 0
+
+%PostLookupProcedure DEPEND %Control PROCEDURE TIMES 0
+
+%ForceWindowRefresh DEPEND %Control LONG TIMES 0
+[ADDITION]
+NAME ABC RecordValidation
+[INSTANCE]
+INSTANCE 1
+PROCPROP
+[PROMPTS]
+%ValidateOnAccept LONG  (1)
+%ValidateOnNonStopSelect LONG  (1)
+%ControlsExcluded MULTI LONG  ()
+%ControlToExclude DEPEND %ControlsExcluded STRING TIMES 0
+[ADDITION]
+NAME ABC SaveButton
+[INSTANCE]
+INSTANCE 2
+PROCPROP
+[PROMPTS]
+%InsertAllowed LONG  (1)
+%InsertMessage @S40  ('Se agregará nueva Alarma')
+%ChangeAllowed LONG  (1)
+%ChangeMessage @S40  ('La Alarma será modificado')
+%DeleteAllowed LONG  (1)
+%DeleteMessage @S40  ('La Alarma será eliminado')
+%ViewMessage @S40  ('Alarma')
+%MessageHeader LONG  (0)
+%ActionOnDelete STRING  ('Standard Warning')
+%PrimingFields MULTI LONG  ()
+%PrimedField DEPEND %PrimingFields FIELD TIMES 0
+
+%PrimedValue DEPEND %PrimingFields @S255 TIMES 0
+
+%ActionOnCancel STRING  ('Confirm cancel')
+%MessageLocation STRING  ('Status Bar')
+%MessageStatusSection @n1  (2)
+
+%HistoryKey        DEFAULT (CtrlH)
+
+%AppendToTitle LONG  ()
+%AppendToTitleID @S255  ('')
+[ADDITION]
+NAME ABC CancelButton
+[INSTANCE]
+INSTANCE 3
+[ADDITION]
+NAME ABC HelpButton
+[INSTANCE]
+INSTANCE 4
+[ADDITION]
+NAME ABC FormVCRControls
+[INSTANCE]
+INSTANCE 5
+PARENT 2
+[ADDITION]
+NAME ABC ViewFormActions
+[INSTANCE]
+INSTANCE 6
+[ADDITION]
+NAME ABC WindowResize
+[INSTANCE]
+INSTANCE 7
+[PROMPTS]
+%UseAppStrategy    DEFAULT (1)
+%AppStrategy       DEFAULT ('Surface')
+%RestrictMinSize   DEFAULT (1)
+%WindowMinWidth    DEFAULT (0)
+%WindowMaxWidth    DEFAULT (0)
+[WINDOW]
+QuickWindow WINDOW('Form TIPO_DE_OBRA'),AT(,,288,70),RESIZE,IMM,GRAY,MDI,HLP('UpdateTIPO_DE_OBRA'),FONT('Microsoft Sans Serif',8,,400,1),CENTER,SYSTEM
+  SHEET,AT(4,4,280,44),USE(?CurrentTab),#ORIG(CurrentTab)
+    TAB('&1) General'),USE(?Tab:1)
+         PROMPT('TDO TIPO:'),USE(?TDO:TDO_TIPO:Prompt),TRN,AT(8,20),#ORIG(?TDO:TDO_TIPO:Prompt),#LINK(TDO:TDO_TIPO)
+         ENTRY(@s5),USE(TDO:TDO_TIPO),AT(76,20,40,10),#ORIG(TDO:TDO_TIPO),#LINK(?TDO:TDO_TIPO:Prompt)
+         PROMPT('TDO DESCRIPCION:'),USE(?TDO:TDO_DESCRIPCION:Prompt),TRN,AT(8,34),#ORIG(?TDO:TDO_DESCRIPCION:Prompt),#LINK(TDO:TDO_DESCRIPCION)
+         ENTRY(@s50),USE(TDO:TDO_DESCRIPCION),AT(76,34,204,10),#ORIG(TDO:TDO_DESCRIPCION),#LINK(?TDO:TDO_DESCRIPCION:Prompt)
+    END
+  END
+  BUTTON('&OK'),AT(129,52,49,14),USE(?OK),ICON('WAOK.ICO'),FLAT,MSG('Accept data and close the window'),TIP('Accept data and close the window'),LEFT,DEFAULT,#SEQ(2),#ORIG(?OK)
+  BUTTON('&Cancel'),AT(182,52,49,14),USE(?Cancel),ICON('WACANCEL.ICO'),FLAT,MSG('Cancel operation'),TIP('Cancel operation'),LEFT,#SEQ(3),#ORIG(?Cancel)
+  BUTTON('&Help'),AT(235,52,49,14),USE(?Help),ICON('WAHELP.ICO'),FLAT,MSG('See Help Window'),TIP('See Help Window'),LEFT,STD(STD:Help),#SEQ(4),#ORIG(?Help)
+ END
